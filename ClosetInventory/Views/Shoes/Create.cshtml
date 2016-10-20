@@ -1,0 +1,54 @@
+﻿@model ClosetInventory.Models.Shoe
+
+@{
+    ViewBag.Title = "Create";
+}
+@if(IsPost)
+{
+    WebImage file = WebImage.GetImageFromRequest();
+    string fileName = Path.GetFileName(file.FileName);
+    var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+    file.Save(path);
+
+    var thumbFile = file.Resize(width: 60, height: 60, preserveAspectRatio: true,
+       preventEnlarge: true);
+    thumbFile.Save("~/Images/Thumbs/" + fileName);
+
+    string smallFile = "/Images/" + fileName;
+    string largeFile = "/Images/Thumbs/" + fileName;
+
+    Model.SmallFile = smallFile;
+    Model.LargeFile = largeFile;
+}
+
+<h1>Image</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Upload Image </legend>
+            <label for="Image">Image</label>
+
+            <script type="text/javascript">
+
+                function ShowPicture(file) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#image')
+                            .attr('src', e.target.result)
+                            .width(150)
+                            .height(200)
+                    };
+                    reader.readAsDataURL(file.files[0])
+                }
+            </script>
+            <input type="file" name="Image" onchange="ShowPicture(this)">
+                <img id ="image" src="#" />
+            <input type="submit" value="Submit" />
+        </fieldset>
+</form>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

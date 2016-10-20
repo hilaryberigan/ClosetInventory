@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "closet-inventory",
+  "private_key_id": "1aad30b533e0c2daf348064f1caf6fa8b56b24f2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDSNU35FwyDM35V\nbDyYerrGLQcptbj5T+3gmEZkWnHAYLSJol3/YREK66vG6gl8buqLFTaPasAr9hK+\nvEBQIX0uCa7siB8zpp/++XMAfIIx5geEwHShL7uPp+Qx07W1iDvBwrE3puZt/nEe\n5Hoh0rbqES6IuWWNkjiqMZTJuqSl8AUF4Kod6jfv/tmeF3dSbInPjJnCaaBZzrAP\n5BmAy4Ae78X/Z4dNokzWETPKvy3eKxKsUcJAcWqtbPx4EIEspnKPm3Isg8VcX0a8\n0BOATX4aRH8yz33FEc1pgjrRgPv69MwyIi7H5OJGZLe6uwtq7XRLaEwqmVVzex8p\nUTQeMeiVAgMBAAECggEAIYZGzTcT08jemRkOAPNx3jFINyq4OWq58VvXviF+isPh\nhyHSA+yjHy6+0pZ4tNOrrErRzMWlqF0yWCEF0MHGiRUaRLbg4wfr9GosISO6T+Lz\nyAQ5lYtbSmnoRtoQ3MbBYQF/6fRAQ8KUn+yoXcSRT3s2BLAstgtf5iTKKfIOWDhJ\nVW0dh65aVewvu//TTI4HFvseLTCb3J2yD5ijwtF0WiqWki1QaeYcDMPNAGokmgZx\n9rI1DX1SPrPIaz2HxezRsZqxrech0YKnfaGpRu61xlzp7TbBX4JpDTP3/KCjZQG2\n2cMCmm+Mp/nIzgS5ymeQrWl/0vqO2Yuq3BXCuorwgQKBgQDqXrm3MMKlBS9hhG0i\nKQ0GQNLoftRQGdNmjxivWRuOsEiVekMGc53vb2aNTMQ4+aWWJj+Yc/OKj5ySv27i\nNkoyVjEeVyxZbWAVSnW4wzqsebkzNvVsO6t/AwlfMU3x2x/oRIEyNTxOOFpF+t59\n+lqudZqfP9rmIGTmn2cjrhhu2QKBgQDlm7o51p+8Wj2MeUvnt8qbC8f3y8ssEYE/\nLzdMF0vWG4BG1sF9DM1z9kv3aVRIKhrLqCkxWZxZ5QnxocGVePEtWrdZy4ZCR6ZO\n7d31B4hFAvCXqe5JB/v+RNfDaYQPxDNvvyULIp/IezgtkOVG0s5Dm1vmaiWN46Gf\n56hzxhPqHQKBgEYRRcJ/wGFneG/WEG57CVrKPIOnjz/XSL1LoJyjrjptd3XA1JL0\nM85mZqltvugtspR+INsqJzBQmQXCV5snke0UmaCxfR/LNEOJPEKdk0gHKBgooRzX\nhgD13nJoIh5hXVuqR1nEUqAr9skfJC9TjpLDtBNSGtZb7u6Hz2T6YnGZAoGARE68\n60IPiXBrSSQ40bna2594oR6O1hBrHAoG8Gsp04ug8PIo4/PwF2SZmwRJ36IvEJF5\nl8Xp/tBl0e3mcnplfbG0RFGJIqTANFENrDzObIGAZA5Y5n8ql62RZwA4GpyrFL6P\n3a0yTeligCPQIe7LEE/i2jyP6ZNj3PeFJNQzzn0CgYBRuvrl+FGFw9HWF9kx6na7\nZ1dZftOgd0qCyCZBBjOn7H336PwEafQw0nIOvS5KcHOs73B0D1IYsB6jmpjoWhGn\nxQ2OgHWKjXDCW3BWtPUc9O1TBsSJuZAhDygxUO7uy06zC1Z8ODFhR3VqyCA+PFFr\nB/bl9yBxpSPwDzQjDNWFZQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "closetinventory@closet-inventory.iam.gserviceaccount.com",
+  "client_id": "115609731410544681585",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/closetinventory%40closet-inventory.iam.gserviceaccount.com"
+}

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ClosetInventory.Models.Weather>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SkyConditions)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SkyConditions)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Temperature }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Temperature }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Temperature })
+        </td>
+    </tr>
+}
+
+</table>

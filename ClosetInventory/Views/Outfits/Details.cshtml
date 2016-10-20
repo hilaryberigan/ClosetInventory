@@ -1,0 +1,98 @@
+﻿@model ClosetInventory.Models.Outfit
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Outfit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cover.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cover.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dress.SmallFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dress.SmallFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Pants.SmallFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pants.SmallFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shirt.SleeveLength)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shirt.SleeveLength)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Shoe.SmallFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Shoe.SmallFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Skirt.SmallFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Skirt.SmallFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WasWorn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WasWorn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isLiked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isLiked)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

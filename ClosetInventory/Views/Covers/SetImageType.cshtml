@@ -1,0 +1,64 @@
+﻿@model ClosetInventory.Models.UploadViewModel
+
+@{
+    ViewBag.Title = "SetImageType";
+}
+
+
+
+<form action="" method="post" id="postTo" >
+    <img id="image" src="@Model.LargeFile" />
+
+    <div id ="suggestion">
+        Does this item fit into the "@Model.ControllerName" category?
+        Would you consider it to be "@Model.Color"?
+
+        <button id="pickType" onclick="PickPath(@Model.ControllerName)">Yes</button>
+        <button id="no" onclick="ManualPick()">No</button>
+    </div>
+    </form>
+<script>
+ function PickPath(Controller) {
+        var path = "~/" + Controller + "/Create";
+
+     $('#postTo').replaceWith('<form action="#" method="post" id="postTo">'
+    .replace("#", path));
+     $('#postTo').submit();
+ };
+
+ function ManualPick() {
+     $('#suggestion').replaceWith('<p id = "suggestion">Which category does it belong in?</p><p id="pants">Pants</p><p id ="shirts">Shirts</p><p id="covers">Covers</p><p id="dresses">dresses</p><p id="shirts">Shirts</p><p id="shoes">Shoes</p>')
+ }
+
+ $(document).ready(function () {
+     $('#pants').click(function () {
+         PickPath("Pants")
+     })
+ })
+ $(document).ready(function () {
+     $('#shirts').click(function () {
+         PickPath("Shirts")
+     })
+ })
+ $(document).ready(function () {
+     $('#dresses').click(function () {
+         PickPath("Dresses")
+     })
+ })
+ $(document).ready(function () {
+     $('#skirts').click(function () {
+         PickPath("Skirts")
+     })
+ })
+ $(document).ready(function () {
+     $('#shoes').click(function () {
+         PickPath("Shoes")
+     })
+ })
+ $(document).ready(function () {
+     $('#covers').click(function () {
+         PickPath("Covers")
+     })
+ })
+
+    </script>
