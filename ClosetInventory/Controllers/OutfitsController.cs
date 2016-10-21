@@ -35,7 +35,21 @@ namespace ClosetInventory.Controllers
             }
             return View(outfit);
         }
+        //[HttpPost]
+        //public ActionResult Create(TotalViewModel model)
+        //{
+        //    Outfit
 
+        //    model.User = (from a in db.Users where a.Id == userId select a).FirstOrDefault();
+        //    model.Covers = (from b in db.Covers where b.UserId == userId select b).ToList();
+        //    model.Pants = (from b in db.Pants where b.UserId == userId select b).ToList();
+        //    model.Shoes = (from b in db.Shoes where b.UserId == userId select b).ToList();
+        //    model.Skirts = (from b in db.Skirts where b.UserId == userId select b).ToList();
+        //    model.Shirts = (from b in db.Shirts where b.UserId == userId select b).ToList();
+        //    model.Dresses = (from b in db.Dresses where b.UserId == userId select b).ToList();
+
+        //    return View(model);
+        //}
         // GET: Outfits/Create
         public ActionResult Create()
         {

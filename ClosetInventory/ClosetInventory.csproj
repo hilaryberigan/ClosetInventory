@@ -242,9 +242,22 @@
     <Compile Include="Controllers\PantsController.cs" />
     <Compile Include="Controllers\ShirtsController.cs" />
     <Compile Include="Controllers\ShoesController.cs" />
+    <Compile Include="Controllers\SkirtsController.cs" />
     <Compile Include="Controllers\WeathersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610210014187_update models.cs" />
+    <Compile Include="Migrations\201610210014187_update models.Designer.cs">
+      <DependentUpon>201610210014187_update models.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610211411266_added userid foreign key to clothing.cs" />
+    <Compile Include="Migrations\201610211411266_added userid foreign key to clothing.Designer.cs">
+      <DependentUpon>201610211411266_added userid foreign key to clothing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610211414323_added foreign key for userid to shoe.cs" />
+    <Compile Include="Migrations\201610211414323_added foreign key for userid to shoe.Designer.cs">
+      <DependentUpon>201610211414323_added foreign key for userid to shoe.cs</DependentUpon>
     </Compile>
     <Compile Include="WorkerClasses\ColorCalculator.cs" />
     <Compile Include="WorkerClasses\ImageManager.cs" />
@@ -271,6 +284,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="WorkerClasses\CategoryGuesser.cs" />
+    <Compile Include="WorkerClasses\OutfitGenerator.cs" />
     <Compile Include="WorkerClasses\ResultsHandler.cs" />
     <Compile Include="WorkerClasses\IPGeocoder.cs" />
     <Compile Include="WorkerClasses\OpenWeather.cs" />
@@ -351,7 +365,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Covers\Create.cshtml" />
+    <Content Include="Views\Home\Upload.cshtml" />
     <Content Include="Views\Covers\Delete.cshtml" />
     <Content Include="Views\Covers\Details.cshtml" />
     <Content Include="Views\Covers\Edit.cshtml" />
@@ -387,7 +401,19 @@
     <Content Include="Views\Weathers\Details.cshtml" />
     <Content Include="Views\Weathers\Edit.cshtml" />
     <Content Include="Views\Weathers\Index.cshtml" />
-    <Content Include="Views\Covers\SetImageType.cshtml" />
+    <Content Include="Views\Home\SetImageType.cshtml" />
+    <Content Include="Views\Home\UserHomePage.cshtml" />
+    <Content Include="Views\Skirts\Create.cshtml" />
+    <Content Include="Views\Skirts\Delete.cshtml" />
+    <Content Include="Views\Skirts\Details.cshtml" />
+    <Content Include="Views\Skirts\Edit.cshtml" />
+    <Content Include="Views\Skirts\Index.cshtml" />
+    <Content Include="Views\Home\_PartialShirts.cshtml" />
+    <Content Include="Views\Home\_PartialCovers.cshtml" />
+    <Content Include="Views\Home\_PartialDresses.cshtml" />
+    <Content Include="Views\Home\_PartialSkirts.cshtml" />
+    <Content Include="Views\Home\_PartialShoes.cshtml" />
+    <Content Include="Views\Home\_PartialPants.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -416,6 +442,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610131854117_update weather model.resx">
       <DependentUpon>201610131854117_update weather model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610210014187_update models.resx">
+      <DependentUpon>201610210014187_update models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610211411266_added userid foreign key to clothing.resx">
+      <DependentUpon>201610211411266_added userid foreign key to clothing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610211414323_added foreign key for userid to shoe.resx">
+      <DependentUpon>201610211414323_added foreign key for userid to shoe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

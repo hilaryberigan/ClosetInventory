@@ -45,31 +45,29 @@ namespace ClosetInventory.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,isCapri,IsHighWaist,IsSkinny,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit")] Pants pants)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(UploadViewModel model)
         {
             if (ModelState.IsValid)
             {
+
+                var pants = new Pants { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile };
                 db.Pants.Add(pants);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", pants);
             }
 
-            return View(pants);
+            return RedirectToAction("Upload", "Home");
         }
 
         // GET: Pants/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(Pants pants)
         {
-            if (id == null)
+            if (pants == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pants pants = db.Pants.Find(id);
-            if (pants == null)
-            {
-                return HttpNotFound();
-            }
+    
             return View(pants);
         }
 
@@ -78,15 +76,15 @@ namespace ClosetInventory.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,isCapri,IsHighWaist,IsSkinny,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit")] Pants pants)
+        public ActionResult Submit([Bind(Include = "Id,isCapri,IsHighWaist,IsSkinny,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit")] Pants pants)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(pants).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Upload", "Home");
             }
-            return View(pants);
+            return RedirectToAction("Edit", pants);
         }
 
         // GET: Pants/Delete/5

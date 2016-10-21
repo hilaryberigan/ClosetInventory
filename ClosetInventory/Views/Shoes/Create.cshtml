@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Create";
 }
-@if(IsPost)
+@*@if(IsPost)
 {
     WebImage file = WebImage.GetImageFromRequest();
     string fileName = Path.GetFileName(file.FileName);
@@ -19,7 +19,7 @@
 
     Model.SmallFile = smallFile;
     Model.LargeFile = largeFile;
-}
+}*@
 
 <h1>Image</h1>
     <form action="" method="post" enctype="multipart/form-data">

@@ -1,0 +1,71 @@
+﻿@model ClosetInventory.Models.UploadViewModel
+
+@{
+    ViewBag.Title = "SetImageType";
+}
+@Scripts.Render("~/bundles/jquery")
+
+<img id="image" src="@Model.LargeFile" />
+
+<form action="" method="post" id="postTo" >
+ 
+    @Html.HiddenFor(model => model.LargeFile)
+    @Html.HiddenFor(model => model.SmallFile)
+
+
+    @*<input type="url" value="@Model.LargeFile" hidden/>
+    <input type="hidden" value="@Model.SmallFile" />*@
+    
+
+    <div id ="suggestion">
+        Does this item fit into the "@Model.ControllerName" category?
+        
+
+        <button type ="button" id="pickType" onclick="PickPath('@Model.ControllerName')">Yes</button>
+        <button type ="button" id="no" onclick="ManualPick()">No</button>
+    </div>
+    </form>
+<script>
+    function PickPath(Controller) {
+ 
+     var path = "/" + Controller + "/Create";
+     $('#postTo').attr("action", path);
+     $('#postTo').submit();
+
+ };
+
+ function ManualPick() {
+     $('#suggestion').replaceWith('<p id = "suggestion">Which category does it belong in?</p><button type="button" id="pants">Pants</button><button type="button" id ="skirts">Skirts</button><button type="button" id="covers">Covers</button><button type="button" id="dresses">dresses</button><button type="button" id="shirts">Shirts</button><button type="button" id="shoes">Shoes</button>');
+
+$(document).ready(function () {
+    $('#pants').click(function () {
+         PickPath("Pants")
+    })
+});
+ $(document).ready(function () {
+     $('#shirts').click(function () {
+         PickPath("Shirts")
+     })
+ });
+ $(document).ready(function () {
+     $('#dresses').click(function () {
+         PickPath("Dresses")
+     })
+ });
+ $(document).ready(function () {
+     $('#skirts').click(function () {
+         PickPath("Skirts")
+     })
+ });
+ $(document).ready(function () {
+     $('#shoes').click(function () {
+         PickPath("Shoes")
+     })
+ });
+ $(document).ready(function () {
+     $('#covers').click(function () {
+         PickPath("Covers")
+     })
+ });
+ };
+    </script>

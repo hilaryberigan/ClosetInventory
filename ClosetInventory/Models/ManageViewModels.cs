@@ -50,7 +50,22 @@ namespace ClosetInventory.Models
         public string ControllerName { get; set; }
 
         public List<string> Descriptions { get; set; }
+
+        public ApplicationUser User { get; set; }
     }
+
+    public class TotalViewModel
+    {
+        public ApplicationUser User { get; set; }
+        public List<Cover> Covers { get; set; }
+        public List<Dress> Dresses { get; set; }
+        public List<Skirt> Skirts { get; set; }
+        public List<Shirt> Shirts { get; set; }
+        public List<Pants> Pants { get; set; }
+        public List<Shoe> Shoes { get; set; }        
+        public Outfit Outfit { get; set; }
+    }
+
 
     public class ManageLoginsViewModel
     {

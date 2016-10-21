@@ -25,6 +25,10 @@ namespace ClosetInventory.Models
 
         public string ColorType { get; set; }//dark, bright, neutral
 
+        [ForeignKey("ApplicationUser")]
+        public string UserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+
 
     }
 }

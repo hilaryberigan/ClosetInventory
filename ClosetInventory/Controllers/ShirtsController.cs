@@ -45,31 +45,29 @@ namespace ClosetInventory.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,SleeveLength,IsCropped,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit")] Shirt shirt)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(UploadViewModel model)
         {
             if (ModelState.IsValid)
             {
+
+                var shirt = new Shirt { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile };
                 db.Shirts.Add(shirt);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", shirt);
             }
 
-            return View(shirt);
+            return RedirectToAction("Upload", "Home");
         }
 
         // GET: Shirts/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(Shirt shirt)
         {
-            if (id == null)
+            if (shirt == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Shirt shirt = db.Shirts.Find(id);
-            if (shirt == null)
-            {
-                return HttpNotFound();
-            }
+    
             return View(shirt);
         }
 
@@ -78,15 +76,15 @@ namespace ClosetInventory.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,SleeveLength,IsCropped,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit")] Shirt shirt)
+        public ActionResult Submit([Bind(Include = "Id,SleeveLength,IsCropped,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit")] Shirt shirt)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(shirt).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Upload", "Home");
             }
-            return View(shirt);
+            return RedirectToAction("Edit", shirt);
         }
 
         // GET: Shirts/Delete/5

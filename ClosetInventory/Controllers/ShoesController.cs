@@ -52,29 +52,25 @@ public ActionResult Create()
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
 
-        public ActionResult Create([Bind(Include = "Id,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType")] Shoe shoe)
+        public ActionResult Create(UploadViewModel model)
         {
             if (ModelState.IsValid)
             {
+
+                var shoe = new Shoe { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile };
                 db.Shoes.Add(shoe);
                 db.SaveChanges();
-                return View (shoe);
+                return RedirectToAction("Edit", shoe);
             }
 
-            return View(shoe);
+            return RedirectToAction("Upload", "Home");
         }
-
         // GET: Shoes/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(Shoe shoe)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Shoe shoe = db.Shoes.Find(id);
             if (shoe == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             return View(shoe);
         }
@@ -84,15 +80,15 @@ public ActionResult Create()
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType")] Shoe shoe)
+        public ActionResult Submit([Bind(Include = "Id,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType")] Shoe shoe)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(shoe).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Upload", "Home");
             }
-            return View(shoe);
+            return RedirectToAction("Edit", shoe);
         }
 
         // GET: Shoes/Delete/5

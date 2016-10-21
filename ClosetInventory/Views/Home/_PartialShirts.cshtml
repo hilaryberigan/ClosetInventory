@@ -1,0 +1,20 @@
+﻿
+    @foreach (var item in Model.Shirts)
+    {
+        <table>
+        <tr>
+            <td>
+                <img src="@item.SmallFile" id="shirtImage" onclick="MoveShirtToOutfit(item.SmallFile)" />
+             
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Shirts", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", "Shirts", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", "Shirts", new { id = item.Id })
+            </td>
+        </tr>
+        </table>
+    }
+
+
+

@@ -45,31 +45,29 @@ namespace ClosetInventory.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,isLong,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit")] Dress dress)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(UploadViewModel model)
         {
             if (ModelState.IsValid)
             {
+
+                var dress = new Dress { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile };
                 db.Dresses.Add(dress);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", dress);
             }
 
-            return View(dress);
+            return RedirectToAction("Upload", "Home");
         }
 
         // GET: Dresses/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(Dress dress)
         {
-            if (id == null)
+            if (dress == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dress dress = db.Dresses.Find(id);
-            if (dress == null)
-            {
-                return HttpNotFound();
-            }
+           
             return View(dress);
         }
 
@@ -78,15 +76,15 @@ namespace ClosetInventory.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,isLong,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit")] Dress dress)
+        public ActionResult Submit([Bind(Include = "Id,isLong,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit")] Dress dress)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(dress).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Upload", "Home");
             }
-            return View(dress);
+            return RedirectToAction("Edit", dress);
         }
 
         // GET: Dresses/Delete/5

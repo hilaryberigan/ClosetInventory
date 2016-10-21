@@ -49,73 +49,42 @@ namespace ClosetInventory.Controllers
 
         // GET: Covers/Create
         public ActionResult Create()
-        {
+       {
             UploadViewModel model = new UploadViewModel();
             return View(model);
         }
         //public ActionResult SetImageType()
 
 
+       
+
+        //POST: Covers/Create
+        //To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult SetImageType(HttpPostedFileBase file)
+        //[ValidateAntiForgeryToken]
+        public ActionResult Create(UploadViewModel model)
         {
-            
-            UploadViewModel model = new UploadViewModel();
-            ImageManager imageManager = new ImageManager();
-            FinalImageResult final = new FinalImageResult();
-            System.Drawing.Image sourceImage = null;
-
-            if (file.ContentLength > 0)
+            if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                sourceImage = System.Drawing.Image.FromStream(file.InputStream);
-                var path = Path.Combine(Server.MapPath("~\\Images\\"), fileName);
-                file.SaveAs(path);
-                model.LargeFile = path;
 
-                System.Drawing.Image image = imageManager.ScaleImage(sourceImage, 75);
-                var thumbPath = Path.Combine(Server.MapPath("~\\Images\\Thumbs\\"), fileName);
-                image.Save(thumbPath);
-                final = imageManager.HandleIncomingImage(path);
-                model.SmallFile = thumbPath;
-                model.Color = final.ImageProps.dominantColors[0].colorName;
-                model.ControllerName = final.ImageLabels.ControllerSuggestion;
+                var cover = new Cover { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile };
+                db.Covers.Add(cover);
+                db.SaveChanges();
+                return RedirectToAction("Edit", cover);
             }
 
-
-            //need large function for figuring out if it is footwear, etc.
-            return View(model);
+            return RedirectToAction("Upload", "Home");
         }
 
-        // POST: Covers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(UploadViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        //db.Covers.Add(cover);
-        //        //db.SaveChanges();
-        //        //return RedirectToAction("Index");
-        //    }
-
-        //    return View(cover);
-        //}
-
         // GET: Covers/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(Cover cover)
         {
-            if (id == null)
+            if (cover == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cover cover = db.Covers.Find(id);
-            if (cover == null)
-            {
-                return HttpNotFound();
-            }
+    
             return View(cover);
         }
 
@@ -124,15 +93,15 @@ namespace ClosetInventory.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Type,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit")] Cover cover)
+        public ActionResult Submit([Bind(Include = "Id,Type,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit")] Cover cover)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(cover).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Upload", "Home");
             }
-            return View(cover);
+            return RedirectToAction("Edit", cover);
         }
 
         // GET: Covers/Delete/5
