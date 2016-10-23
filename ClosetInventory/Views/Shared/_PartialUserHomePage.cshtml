@@ -1,0 +1,34 @@
+﻿
+@Scripts.Render("~/bundles/jquery")
+<h2>UserHomePage</h2>
+<script src="/Scripts/jquery-1.10.2.js"></script>
+
+<div id="outfitCover">
+    @if (Model.Outfit.Cover != null)
+    {
+        <img id="cover" src="@Model.Outfit.Cover.SmallFile" />
+    }
+</div>
+<div id="outfitShirt">
+    @if (Model.Outfit.Shirt != null)
+    {
+        <img id="shirt" src="@Model.Outfit.Shirt.SmallFile" />
+    }
+</div>
+<div id="outfitPants">
+    @if (Model.Outfit.Pants != null)
+    {
+        <img id="pants" src="@Model.Outfit.Pants.SmallFile" />
+    }
+</div>
+<div id="outfitShoe">
+    @if (Model.Outfit.Shoe != null)
+    {
+        <img id="shoes" src="@Model.Outfit.Shoe.SmallFile" />
+    }
+</div>
+
+
+
+
+

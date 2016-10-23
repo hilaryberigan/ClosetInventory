@@ -35,22 +35,9 @@ namespace ClosetInventory.Controllers
             }
             return View(outfit);
         }
-        //[HttpPost]
-        //public ActionResult Create(TotalViewModel model)
-        //{
-        //    Outfit
+        [HttpPost]
 
-        //    model.User = (from a in db.Users where a.Id == userId select a).FirstOrDefault();
-        //    model.Covers = (from b in db.Covers where b.UserId == userId select b).ToList();
-        //    model.Pants = (from b in db.Pants where b.UserId == userId select b).ToList();
-        //    model.Shoes = (from b in db.Shoes where b.UserId == userId select b).ToList();
-        //    model.Skirts = (from b in db.Skirts where b.UserId == userId select b).ToList();
-        //    model.Shirts = (from b in db.Shirts where b.UserId == userId select b).ToList();
-        //    model.Dresses = (from b in db.Dresses where b.UserId == userId select b).ToList();
 
-        //    return View(model);
-        //}
-        // GET: Outfits/Create
         public ActionResult Create()
         {
             ViewBag.CoverId = new SelectList(db.Covers, "Id", "Type");
@@ -68,23 +55,16 @@ namespace ClosetInventory.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ShirtId,ShoeId,PantsId,DressId,SkirtId,CoverId,Date,WasWorn,isLiked,UserId")] Outfit outfit)
+        public ActionResult Create(TotalViewModel model)
         {
-            if (ModelState.IsValid)
+            if (model.Outfit != null)
             {
+                Outfit outfit = model.Outfit;
                 db.Outfits.Add(outfit);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+               
             }
-
-            ViewBag.CoverId = new SelectList(db.Covers, "Id", "Type", outfit.CoverId);
-            ViewBag.DressId = new SelectList(db.Dresses, "Id", "SmallFile", outfit.DressId);
-            ViewBag.PantsId = new SelectList(db.Pants, "Id", "SmallFile", outfit.PantsId);
-            ViewBag.ShirtId = new SelectList(db.Shirts, "Id", "SleeveLength", outfit.ShirtId);
-            ViewBag.ShoeId = new SelectList(db.Shoes, "Id", "SmallFile", outfit.ShoeId);
-            ViewBag.SkirtId = new SelectList(db.Skirts, "Id", "SmallFile", outfit.SkirtId);
-            ViewBag.UserId = new SelectList(db.Users, "Id", "Email", outfit.UserId);
-            return View(outfit);
+            return RedirectToAction("UserHomePage", "Home", model); 
         }
 
         // GET: Outfits/Edit/5

@@ -22,19 +22,19 @@ namespace ClosetInventory.Controllers
             TotalViewModel model = new TotalViewModel();
             DateTime date = DateTime.Today;
 
-            model.User = (from a in db.Users where a.Id == userId select a).FirstOrDefault();
-            model.Covers = (from b in db.Covers where b.UserId == userId select b).ToList();
-            model.Pants = (from b in db.Pants where b.UserId == userId select b).ToList();
-            model.Shoes = (from b in db.Shoes where b.UserId == userId select b).ToList();
-            model.Skirts = (from b in db.Skirts where b.UserId == userId select b).ToList();
-            model.Shirts = (from b in db.Shirts where b.UserId == userId select b).ToList();
+            model.User = db.Users.Where(m => m.Id == userId).FirstOrDefault();
+            model.Covers = db.Covers.Where(m => m.UserId == userId).ToList();
+            model.Pants = db.Pants.Where(m => m.UserId == userId).ToList();
+            model.Shoes = db.Shoes.Where(m => m.UserId == userId).ToList();
+            model.Skirts = db.Skirts.Where(m => m.UserId == userId).ToList();
+            model.Shirts = db.Shirts.Where(m => m.UserId == userId).ToList();
             model.Dresses = db.Dresses.Where(n => n.UserId == userId).ToList();
             
             //model.Dresses = (from b in db.Dresses where b.UserId == userId select b).ToList();
 
-            var Outfits = (from a in db.Outfits where a.UserId == userId select a).ToList();
+            var Outfits = db.Outfits.Where(n => n.UserId == userId).ToList();
 
-            var outfit = (from b in Outfits where b.Date == date select b).FirstOrDefault();
+            var outfit = Outfits.Where(m=>m.Date == date).FirstOrDefault();
 
             if (outfit != null)
             {
@@ -49,14 +49,59 @@ namespace ClosetInventory.Controllers
             return View(model);
         }
 
+
         [HttpPost]
-        public ActionResult UserHomePage(TotalViewModel model)
+        public ActionResult HomeCovers(Outfit outfit)
+        {
+            var covers = db.Covers.Where(m => m.UserId == outfit.UserId).ToList();
+            TotalViewModel model = new TotalViewModel { Outfit = outfit, Covers = covers };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult HomeDresses(Outfit outfit)
+        {
+            var dresses = db.Dresses.Where(m => m.UserId == outfit.UserId).ToList();
+            TotalViewModel model = new TotalViewModel { Outfit = outfit, Dresses = dresses };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult HomePants(Outfit outfit)
+        {
+            var pants = db.Pants.Where(m => m.UserId == outfit.UserId).ToList();
+            TotalViewModel model = new TotalViewModel { Outfit = outfit, Pants = pants };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult HomeShirts(Outfit outfit)
+        {
+            var shirts = db.Shirts.Where(m => m.UserId == outfit.UserId).ToList();
+            TotalViewModel model = new TotalViewModel { Outfit = outfit, Shirts = shirts };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult HomeShoes(Outfit outfit)
+        {
+            var shoes = db.Shoes.Where(m => m.UserId == outfit.UserId).ToList();
+            TotalViewModel model = new TotalViewModel { Outfit = outfit, Shoes = shoes };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult HomeSkirts(Outfit outfit)
+        {
+            var skirts = db.Skirts.Where(m => m.UserId == outfit.UserId).ToList();
+            TotalViewModel model = new TotalViewModel { Outfit = outfit, Skirts = skirts };
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult UserHomePage(Outfit outfit)
         {
        
-                db.Outfits.Add(model.Outfit);
+                db.Outfits.Add(outfit);
                 db.SaveChanges();
 
-            return View(model);
+            return View(outfit);
             
         }
 
@@ -117,5 +162,8 @@ namespace ClosetInventory.Controllers
 
            
         }
+
+   
+
     }
 }

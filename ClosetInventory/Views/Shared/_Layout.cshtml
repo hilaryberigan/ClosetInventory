@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 
 </head>
 <body>
@@ -42,5 +43,18 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @*<script type="text/javascript">*@
+
+    @*function RenderPage(item) {
+        var path = "~/Home/Home" + item;
+
+        $('#action').attr("action", path);
+        $('#action').submit();
+    }
+    function WearOutfit() {
+        var path = "~/Outfits/Create"
+        $('#action').attr("action", path)
+    }
+    </script>*@
 </body>
 </html>

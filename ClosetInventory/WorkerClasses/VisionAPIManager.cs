@@ -1,15 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data;
-using System.Data.Entity;
-using System.Net;
-using System.Web.Mvc;
-using ClosetInventory.Models;
 using System.IO;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Http;
 using Google.Apis.Services;

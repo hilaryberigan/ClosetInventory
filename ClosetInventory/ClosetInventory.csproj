@@ -408,12 +408,13 @@
     <Content Include="Views\Skirts\Details.cshtml" />
     <Content Include="Views\Skirts\Edit.cshtml" />
     <Content Include="Views\Skirts\Index.cshtml" />
-    <Content Include="Views\Home\_PartialShirts.cshtml" />
-    <Content Include="Views\Home\_PartialCovers.cshtml" />
-    <Content Include="Views\Home\_PartialDresses.cshtml" />
-    <Content Include="Views\Home\_PartialSkirts.cshtml" />
-    <Content Include="Views\Home\_PartialShoes.cshtml" />
-    <Content Include="Views\Home\_PartialPants.cshtml" />
+    <Content Include="Views\Shared\_PartialUserHomePage.cshtml" />
+    <Content Include="Views\Home\HomeDresses.cshtml" />
+    <Content Include="Views\Home\HomeCovers.cshtml" />
+    <Content Include="Views\Home\HomePants.cshtml" />
+    <Content Include="Views\Home\HomeShirts.cshtml" />
+    <Content Include="Views\Home\HomeShoes.cshtml" />
+    <Content Include="Views\Home\HomeSkirts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

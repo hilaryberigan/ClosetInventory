@@ -13,7 +13,7 @@ namespace ClosetInventory.Models
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
     }
-
+    
     public class UploadViewModel
     {
         

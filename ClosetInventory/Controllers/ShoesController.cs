@@ -10,6 +10,7 @@ using ClosetInventory.Models;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Data.SqlClient;
+using Microsoft.AspNet.Identity;
 
 namespace ClosetInventory.Controllers
 {
@@ -56,8 +57,8 @@ public ActionResult Create()
         {
             if (ModelState.IsValid)
             {
-
-                var shoe = new Shoe { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile };
+                var userId = User.Identity.GetUserId();
+                var shoe = new Shoe { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile, UserId = userId };
                 db.Shoes.Add(shoe);
                 db.SaveChanges();
                 return RedirectToAction("Edit", shoe);
@@ -80,7 +81,7 @@ public ActionResult Create()
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Submit([Bind(Include = "Id,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType")] Shoe shoe)
+        public ActionResult Submit([Bind(Include = "Id,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,UserId")] Shoe shoe)
         {
             if (ModelState.IsValid)
             {

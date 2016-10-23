@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClosetInventory.Models;
+using Microsoft.AspNet.Identity;
 
 namespace ClosetInventory.Controllers
 {
@@ -50,8 +51,8 @@ namespace ClosetInventory.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                var skirt = new Skirt { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile };
+                var userId = User.Identity.GetUserId();
+                var skirt = new Skirt { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile, UserId = userId };
                 db.Skirts.Add(skirt);
                 db.SaveChanges();
                 return RedirectToAction("Edit", skirt);
@@ -77,7 +78,7 @@ namespace ClosetInventory.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Submit([Bind(Include = "Id,isLong,IsHighWaist,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit,HasPattern")] Skirt skirt)
+        public ActionResult Submit([Bind(Include = "Id,isLong,IsHighWaist,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit,HasPattern,UserId")] Skirt skirt)
         {
             if (ModelState.IsValid)
             {

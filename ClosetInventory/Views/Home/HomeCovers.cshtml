@@ -1,0 +1,52 @@
+﻿@model ClosetInventory.Models.TotalViewModel
+@{
+    ViewBag.Title = "HomeCovers";
+}
+
+<h2>HomeCovers</h2>
+
+@Html.Partial("_PartialUserHomePage", Model)
+@using (Html.BeginForm())
+{
+
+    <div class="form-horizontal">
+        <h4>Outfit</h4>
+        <hr />
+
+        <div class="form-group">
+            @Html.HiddenFor(model => Model.Outfit)
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Wear Outfit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@foreach (var item in Model.Covers)
+{
+    <table>
+        <tr>
+            <td>
+                <img src="@item.SmallFile" id="coverImage" onclick="MoveCoverToOutfit(item.SmallFile)" />
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Covers", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", "Covers", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", "Covers", new { id = item.Id })
+            </td>
+        </tr>
+    </table>
+}
+<script>
+ function MoveCoverToOutfit(smallFile) {
+
+        $('#outfitCover')
+            .replaceWith('<div id="outfitCover"><img id="cover" src="#" /></div>'
+            .replace("#", smallFile));
+    }
+</script>

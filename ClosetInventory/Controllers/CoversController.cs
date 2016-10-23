@@ -19,6 +19,7 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ClosetInventory.WorkerClasses;
+using Microsoft.AspNet.Identity;
 
 namespace ClosetInventory.Controllers
 {
@@ -67,8 +68,8 @@ namespace ClosetInventory.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                var cover = new Cover { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile };
+                var userId = User.Identity.GetUserId();
+                var cover = new Cover { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile, UserId = userId };
                 db.Covers.Add(cover);
                 db.SaveChanges();
                 return RedirectToAction("Edit", cover);
@@ -93,7 +94,7 @@ namespace ClosetInventory.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Submit([Bind(Include = "Id,Type,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit")] Cover cover)
+        public ActionResult Submit([Bind(Include = "Id,Type,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit,UserId")] Cover cover)
         {
             if (ModelState.IsValid)
             {

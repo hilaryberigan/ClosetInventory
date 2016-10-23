@@ -53,7 +53,9 @@
                 @Html.ValidationMessageFor(model => model.ColorType, "", new { @class = "text-danger" })
             </div>
         </div>
-       @Html.HiddenFor(model => model.LargeFile)@Html.HiddenFor(model => model.SmallFile)
+       @Html.HiddenFor(model => model.LargeFile)
+        @Html.HiddenFor(model => model.SmallFile)
+        @Html.HiddenFor(model => model.UserId)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
