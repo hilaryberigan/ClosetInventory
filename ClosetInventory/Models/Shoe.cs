@@ -17,12 +17,15 @@ namespace ClosetInventory.Models
 
         public bool IsFavorite { get; set; }
 
+        [Display(Name = "Dressiness")]
         public int? DressinessRating { get; set; }
 
+        [Display(Name = "Warmth Of Item")]
         public int? WarmthRating { get; set; }
 
         public string Color { get; set; }
 
+        [Display(Name = "Color Type")]
         public string ColorType { get; set; }//dark, bright, neutral
 
         [ForeignKey("ApplicationUser")]

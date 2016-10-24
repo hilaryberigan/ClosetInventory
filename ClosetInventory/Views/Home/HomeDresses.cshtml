@@ -40,16 +40,18 @@
 
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", "Dresses", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", "Dresses", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", "Dresses", new { id = item.Id })
+                @Html.ActionLink("Edit", "Edit", "Dresses", new { id = item.Id }, null) |
+                @Html.ActionLink("Details", "Details", "Dresses", new { id = item.Id }, null) |
+                @Html.ActionLink("Delete", "Delete", "Dresses", new { id = item.Id }, null)
             </td>
         </tr>
     </table>
 }
 <form action="" method="post" id="postTo">
-    @Html.HiddenFor(Model => Model.Outfit)
+    @Html.HiddenFor(model => model.Outfit.Id)
+    @Html.HiddenFor(model => model.Outfit.UserId)
 
+    <div id="itemType"></div>
 </form>
 
 <script type="text/javascript">
@@ -63,6 +65,18 @@
             .replaceWith('');
     }
 
-   
+
+
+    function RenderPage(item) {
+        var path = "Home" + item;
+        $('#postTo').attr("action", path);
+        $('#postTo').submit();
+
+    }
+    function WearOutfit() {
+        var path = "~/Outfits/Create";
+        $('#postTo').attr("action", path)
+    }
+
 
 </script>

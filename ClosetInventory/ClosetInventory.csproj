@@ -259,6 +259,10 @@
     <Compile Include="Migrations\201610211414323_added foreign key for userid to shoe.Designer.cs">
       <DependentUpon>201610211414323_added foreign key for userid to shoe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610231923503_updated clothing model.cs" />
+    <Compile Include="Migrations\201610231923503_updated clothing model.Designer.cs">
+      <DependentUpon>201610231923503_updated clothing model.cs</DependentUpon>
+    </Compile>
     <Compile Include="WorkerClasses\ColorCalculator.cs" />
     <Compile Include="WorkerClasses\ImageManager.cs" />
     <Compile Include="Migrations\201610122022446_initial clothing test.cs" />
@@ -330,6 +334,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\search.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -415,6 +420,7 @@
     <Content Include="Views\Home\HomeShirts.cshtml" />
     <Content Include="Views\Home\HomeShoes.cshtml" />
     <Content Include="Views\Home\HomeSkirts.cshtml" />
+    <Content Include="Views\Home\Shop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -452,6 +458,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610211414323_added foreign key for userid to shoe.resx">
       <DependentUpon>201610211414323_added foreign key for userid to shoe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610231923503_updated clothing model.resx">
+      <DependentUpon>201610231923503_updated clothing model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

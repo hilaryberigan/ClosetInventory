@@ -1,32 +1,48 @@
 ﻿
 @Scripts.Render("~/bundles/jquery")
-<h2>UserHomePage</h2>
-<script src="/Scripts/jquery-1.10.2.js"></script>
 
-<div id="outfitCover">
-    @if (Model.Outfit.Cover != null)
-    {
-        <img id="cover" src="@Model.Outfit.Cover.SmallFile" />
-    }
-</div>
-<div id="outfitShirt">
-    @if (Model.Outfit.Shirt != null)
-    {
-        <img id="shirt" src="@Model.Outfit.Shirt.SmallFile" />
-    }
-</div>
-<div id="outfitPants">
-    @if (Model.Outfit.Pants != null)
-    {
-        <img id="pants" src="@Model.Outfit.Pants.SmallFile" />
-    }
-</div>
-<div id="outfitShoe">
-    @if (Model.Outfit.Shoe != null)
-    {
-        <img id="shoes" src="@Model.Outfit.Shoe.SmallFile" />
-    }
-</div>
+<center>
+    <h2>Today's Outfit Suggestion</h2>
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+    <div id="outfitImages">
+        <div id="outfitCover">
+            @if (Model.Outfit.Cover != null)
+            {
+                <img id="cover" src="@Model.Outfit.Cover.LargeFile" />
+            }
+        </div>
+        <div id="outfitShirt">
+            @if (Model.Outfit.Shirt != null)
+            {
+                <img id="shirt" src="@Model.Outfit.Shirt.LargeFile" />
+            }
+        </div>
+        <div id="outfitPants">
+            @if (Model.Outfit.Pants != null)
+            {
+                <img id="pants" src="@Model.Outfit.Pants.LargeFile" />
+            }
+        </div>
+        <div id="outfitShoe">
+            @if (Model.Outfit.Shoe != null)
+            {
+                <img id="shoes" src="@Model.Outfit.Shoe.LargeFile" />
+            }
+        </div>
+        <div id="outfitDress">
+            @if (Model.Outfit.Dress != null && Model.Outfit.Shirt == null && Model.Outfit.Pants == null)
+            {
+                <img id="shoes" src="@Model.Outfit.Shoe.LargeFile" />
+            }
+        </div>
+    </div>
+    <button type="button" onclick="RenderPage('Dresses')">Dresses</button>
+    <button type="button" onclick="RenderPage('Pants')">Pants</button>
+    @*<button type="button" onclick="RenderPage('Skirts')">Skirts</button>*@
+    <button type="button" onclick="RenderPage('Shirts')">Shirts</button>
+    <button type="button" onclick="RenderPage('Shoes')">Shoes</button>
+    <button type="button" onclick="RenderPage('Covers')">Covers</button>
+</center>
 
 
 

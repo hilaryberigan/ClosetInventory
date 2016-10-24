@@ -3,85 +3,61 @@
 @{
     ViewBag.Title = "Index";
 }
+<script src="/Scripts/jquery-1.10.2.js"></script>
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Cover.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Dress.SmallFile)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pants.SmallFile)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Shirt.SleeveLength)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Shoe.SmallFile)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Skirt.SmallFile)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WasWorn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isLiked)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cover.Type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dress.SmallFile)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Pants.SmallFile)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Shirt.SleeveLength)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Shoe.SmallFile)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Skirt.SmallFile)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WasWorn)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.isLiked)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
 
-</table>
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                    <div id="outfitCover">
+                        @if (item.Cover != null)
+                {
+                            <img id="cover" src="@item.Cover.LargeFile" />
+                        }
+                    </div>
+                </td>
+            <td>
+                    <div id="outfitShirt">
+                        @if (item.Shirt != null)
+                {
+                            <img id="shirt" src="@item.Shirt.LargeFile" />
+                        }
+                    </div>
+                </td>
+            <td>
+                    <div id="outfitPants">
+                        @if (item.Pants != null)
+                {
+                            <img id="pants" src="@item.Pants.LargeFile" />
+                        }
+                    </div>
+                </td>
+            <td>
+                    <div id="outfitShoe">
+                        @if (item.Shoe != null)
+                {
+                            <img id="shoes" src="@item.Shoe.LargeFile" />
+                        }
+                    </div>
+                </td>
+            <td>
+                    <div id="outfitDress">
+                        @if (item.Dress != null && item.Shirt == null && item.Pants == null)
+                {
+                            <img id="shoes" src="@item.Shoe.LargeFile" />
+                        }
+                    </div>
+                
+            </td>
+            <td>
+               Date Worn: 
+                @Html.DisplayFor(modelitem => item.Date)
+            </td>
+            </tr>
+            }
+    </table>

@@ -8,6 +8,7 @@ using System.IO;
 using Microsoft.AspNet.Identity;
 
 using ClosetInventory.WorkerClasses;
+using System.Threading.Tasks;
 
 namespace ClosetInventory.Controllers
 {
@@ -16,8 +17,10 @@ namespace ClosetInventory.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         //Get:
-        public ActionResult UserHomePage()
+        public async Task<ActionResult> UserHomePage()
         {
+            WeatherSearch weather = new WeatherSearch();
+           
             var userId = User.Identity.GetUserId();
             TotalViewModel model = new TotalViewModel();
             DateTime date = DateTime.Today;
@@ -42,54 +45,66 @@ namespace ClosetInventory.Controllers
             }
             else
             {
+                var temperature = weather.GetTemperature();
+                var temp = await temperature;
+                 
                 OutfitGenerator og = new OutfitGenerator();
-                model.Outfit = og.MakeOutfit(model.User, db);
+                model.Outfit = og.MakeOutfit(model.User, db, temp, "business casual");
+
             }
 
             return View(model);
         }
 
+        
 
         [HttpPost]
-        public ActionResult HomeCovers(Outfit outfit)
+        public ActionResult HomeCovers(TotalViewModel model)
         {
-            var covers = db.Covers.Where(m => m.UserId == outfit.UserId).ToList();
-            TotalViewModel model = new TotalViewModel { Outfit = outfit, Covers = covers };
+            model.Outfit = db.Outfits.Include("Pants").Include("Skirt").Include("Shirt").Include("Cover").Include("Shoe").Include("Dress").Where(m => m.Id == model.Outfit.Id).FirstOrDefault();
+            model.Covers = db.Covers.Where(m => m.UserId == model.Outfit.UserId).ToList();
+
             return View(model);
         }
         [HttpPost]
-        public ActionResult HomeDresses(Outfit outfit)
+        public ActionResult HomeDresses(TotalViewModel model)
         {
-            var dresses = db.Dresses.Where(m => m.UserId == outfit.UserId).ToList();
-            TotalViewModel model = new TotalViewModel { Outfit = outfit, Dresses = dresses };
+
+            model.Outfit = db.Outfits.Include("Pants").Include("Skirt").Include("Shirt").Include("Cover").Include("Shoe").Include("Dress").Where(m => m.Id == model.Outfit.Id).FirstOrDefault();
+            model.Dresses = db.Dresses.Where(m => m.UserId == model.Outfit.UserId).ToList();
+          
             return View(model);
         }
-        [HttpPost]
-        public ActionResult HomePants(Outfit outfit)
+       
+        public ActionResult HomePants(TotalViewModel model)
         {
-            var pants = db.Pants.Where(m => m.UserId == outfit.UserId).ToList();
-            TotalViewModel model = new TotalViewModel { Outfit = outfit, Pants = pants };
+            model.Outfit = db.Outfits.Include("Pants").Include("Skirt").Include("Shirt").Include("Cover").Include("Shoe").Include("Dress").Where(m => m.Id == model.Outfit.Id).FirstOrDefault();
+            model.Pants = db.Pants.Where(m => m.UserId == model.Outfit.UserId).ToList();
+
             return View(model);
         }
-        [HttpPost]
-        public ActionResult HomeShirts(Outfit outfit)
+      
+        public ActionResult HomeShirts(TotalViewModel model)
         {
-            var shirts = db.Shirts.Where(m => m.UserId == outfit.UserId).ToList();
-            TotalViewModel model = new TotalViewModel { Outfit = outfit, Shirts = shirts };
+            model.Outfit = db.Outfits.Include("Pants").Include("Skirt").Include("Shirt").Include("Cover").Include("Shoe").Include("Dress").Where(m => m.Id == model.Outfit.Id).FirstOrDefault();
+            model.Shirts = db.Shirts.Where(m => m.UserId == model.Outfit.UserId).ToList();
+
             return View(model);
         }
-        [HttpPost]
-        public ActionResult HomeShoes(Outfit outfit)
+      
+        public ActionResult HomeShoes(TotalViewModel model)
         {
-            var shoes = db.Shoes.Where(m => m.UserId == outfit.UserId).ToList();
-            TotalViewModel model = new TotalViewModel { Outfit = outfit, Shoes = shoes };
+            model.Outfit = db.Outfits.Include("Pants").Include("Skirt").Include("Shirt").Include("Cover").Include("Shoe").Include("Dress").Where(m => m.Id == model.Outfit.Id).FirstOrDefault();
+            model.Shoes = db.Shoes.Where(m => m.UserId == model.Outfit.UserId).ToList();
+
             return View(model);
         }
-        [HttpPost]
-        public ActionResult HomeSkirts(Outfit outfit)
+      
+        public ActionResult HomeSkirts(TotalViewModel model)
         {
-            var skirts = db.Skirts.Where(m => m.UserId == outfit.UserId).ToList();
-            TotalViewModel model = new TotalViewModel { Outfit = outfit, Skirts = skirts };
+            model.Outfit = db.Outfits.Include("Pants").Include("Skirt").Include("Shirt").Include("Cover").Include("Shoe").Include("Dress").Where(m => m.Id == model.Outfit.Id).FirstOrDefault();
+            model.Skirts = db.Skirts.Where(m => m.UserId == model.Outfit.UserId).ToList();
+
             return View(model);
         }
 
@@ -107,6 +122,12 @@ namespace ClosetInventory.Controllers
 
         public ActionResult Index()
         {
+
+            return View();
+        }
+        public ActionResult Shop()
+        {
+
             return View();
         }
 
@@ -155,6 +176,11 @@ namespace ClosetInventory.Controllers
                     model.SmallFile = smallFile;
                     model.Color = final.ImageProps.dominantColors[0].colorName;
                     model.ControllerName = final.ImageLabels.ControllerSuggestion;
+
+                    if (model.Color == "black")
+                    {
+                        model.ColorType = "dark";
+                    }
                 }
                 return View(model);
             }

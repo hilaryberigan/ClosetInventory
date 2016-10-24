@@ -34,20 +34,42 @@
 
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", "Shirts", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", "Shirts", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", "Shirts", new { id = item.Id })
+                @Html.ActionLink("Edit", "Edit", "Shirts", new { id = item.Id }, null) |
+                @Html.ActionLink("Details", "Details", "Shirts", new { id = item.Id }, null) |
+                @Html.ActionLink("Delete", "Delete", "Shirts", new { id = item.Id }, null)
             </td>
         </tr>
     </table>
 }
-<script>
+<form action="" method="post" id="postTo">
+    @Html.HiddenFor(model => model.Outfit.Id)
+    @Html.HiddenFor(model => model.Outfit.UserId)
 
-    function MoveShirtToOutfit(smallFile) {
+    <div id="itemType"></div>
+</form>
+<script type="text/javascript">
+    function MoveDressToOutfit(smallFile) {
 
-     $('#outfitShirt')
-         .replaceWith('<div id="outfitShirt"><img id="shirt" src="#" /></div>'
-         .replace("#", smallFile));
+        $('#outfitPants')
+            .replaceWith('<div id="outfitPants"><img id="dress" src="#" /></div>'
+            .replace("#", smallFile));
+
+        $('#outfitShirt')
+            .replaceWith('');
+    }
 
 
- }</script>
+
+    function RenderPage(item) {
+        var path = "Home" + item;
+        $('#postTo').attr("action", path);
+        $('#postTo').submit();
+
+    }
+    function WearOutfit() {
+        var path = "~/Outfits/Create";
+        $('#postTo').attr("action", path)
+    }
+
+
+</script>

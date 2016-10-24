@@ -36,6 +36,7 @@ namespace ClosetInventory.Models
         public int? CoverId { get; set; }
         public Cover Cover { get; set; }
 
+        [Display(Name = "Last Worn")]
         public DateTime Date { get; set; }
 
         public bool WasWorn { get; set; }

@@ -5,7 +5,7 @@
 }
 
 
-@using (Html.BeginForm())
+@*@using (Html.BeginForm())
 {
 
     <div class="form-horizontal">
@@ -24,38 +24,27 @@
             </div>
         </div>
     </div>
-}
+}*@
 @Html.Partial("_PartialUserHomePage", Model)
-<form action="" method="post" id="postTo">
 
+<form action="" method="post" id="postTo">
+    
+
+    @Html.HiddenFor(model => model.Outfit.Id)
+    @Html.HiddenFor(model => model.Outfit.UserId)
 
 </form>
-<button type="button" onclick="RenderPage('Dresses')">Dresses</button>
-<button type="button" onclick="RenderPage('Pants')">Pants</button>
-<button type="button" onclick="RenderPage('Skirts')">Skirts</button>
-<button type="button" onclick="RenderPage('Shirts')">Shirts</button>
-<button type="button" onclick="RenderPage('Shoes')">Shoes</button>
-<button type="button" onclick="RenderPage('Covers')">Covers</button>
+
+
+
+
 <script type="text/javascript">
 
- function RenderPage(item) {
-     var path = "Home" + item;
-     var model = @Html.Raw(Json.Encode(Model));
-     $.ajax({
-    url: '/home/' + path,
-    type: 'POST',
-    data: {model,
-    contentType: 'application/json; charset=utf-8',
-    success: function (data) {
-        alert(data.success);
-    },
-    error: function () {
-        alert("error");
-    }
-});
-        //$('#postTo').attr("action", path);
-        //$('#postTo').submit();
-
+    function RenderPage(item) {
+        var path = "Home" + item;
+        $('#postTo').attr("action", path);
+        $('#postTo').submit();
+    
     }
     function WearOutfit() {
         var path = "~/Outfits/Create";

@@ -131,7 +131,7 @@ namespace ClosetInventory.WorkerClasses
         public string pod { get; set; }
     }
 
-    public class List
+    public class WeatherList
     {
         public int dt { get; set; }
         public Main main { get; set; }
@@ -149,6 +149,6 @@ namespace ClosetInventory.WorkerClasses
         public string cod { get; set; }
         public double message { get; set; }
         public int cnt { get; set; }
-        public List<List> list { get; set; }
+        public List<WeatherList> list { get; set; }
     }
 }

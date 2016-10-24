@@ -2,52 +2,84 @@
 @{
     ViewBag.Title = "HomePants";
 }
+<center>
+    <h2>Your Closet!</h2>
 
-<h2>HomePants</h2>
+    @Html.Partial("_PartialUserHomePage", Model)
+    @using (Html.BeginForm())
+    {
 
-@Html.Partial("_PartialUserHomePage", Model)
-@using (Html.BeginForm())
-{
+        <div class="form-horizontal">
 
-    <div class="form-horizontal">
-        <h4>Outfit</h4>
-        <hr />
+            <hr />
 
-        <div class="form-group">
-            @Html.HiddenFor(model => Model.Outfit)
-        </div>
+            <div class="form-group">
+                @Html.HiddenFor(model => Model.Outfit)
+            </div>
 
 
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Wear Outfit" class="btn btn-default" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Wear Outfit" class="btn btn-default" />
+                </div>
             </div>
         </div>
+    }
+
+    <div class="container gallery">
+        <center>
+            @foreach (var item in Model.Pants)
+            {
+                <div class="col-sm-2" style="margin-left: 50px; margin-right:50px; margin-top: 5px; padding: 10px;">
+                    <div class="boxgroup">
+                        <div class="img">
+                            <img src="@item.LargeFile" id="pantsImage" />
+                        </div>
+
+                        @*<img src="img_fjords.jpg" alt="Trolltunga Norway" width="300" height="200">*@
+                        <div class="desc">
+                            @Html.ActionLink("Edit", "Edit", "Pants", new { id = item.Id }, null) |
+                            @Html.ActionLink("Details", "Details", "Pants", new { id = item.Id }, null) |
+                            @Html.ActionLink("Delete", "Delete", "Pants", new { id = item.Id }, null)
+                            <button id="move" type="button" class="btn btn-primary" onclick="MovePantsToOutfit(@item.SmallFile)">Add to Outfit</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            }
+        </center>
     </div>
-}
 
-@foreach (var item in Model.Pants)
-{
-    <table>
-        <tr>
-            <td>
-                <img src="@item.SmallFile" id="pantsImage" onclick="MovePantsToOutfit(item.SmallFile)" />
+    <form action="" method="post" id="postTo">
+        @Html.HiddenFor(model => model.Outfit.Id)
+        @Html.HiddenFor(model => model.Outfit.UserId)
 
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "Pants", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", "Pants", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", "Pants", new { id = item.Id })
-            </td>
-        </tr>
-    </table>
-}
-<script>
+        <div id="itemType"></div>
+    </form>
+</center>
+<script type="text/javascript">
     function MovePantsToOutfit(smallFile) {
 
-        $('#outfitPants')
-            .replaceWith('<div id="outfitPants"><img id="pants" src="#" /></div>'
-            .replace("#", smallFile));
+        $('#pants')
+            .attr("src", smallFile);               
+            location.reload();
+    };
+
+      
+    
+
+    function RenderPage(item) {
+        var path = "Home" + item;
+        $('#postTo').attr("action", path);
+        $('#postTo').submit();
+
     }
+    function WearOutfit() {
+        var path = "~/Outfits/Create";
+        $('#postTo').attr("action", path)
+    }
+
+
 </script>

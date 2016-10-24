@@ -42,8 +42,9 @@ namespace ClosetInventory.Controllers
         // GET: Weathers/Create
         public async Task<ActionResult> Create()
         {
-            var results = await WeatherSearch.GetRootObject();
-            return View("Create", results);
+            WeatherSearch ws = new WeatherSearch();
+            //var results = await ws.GetRootObject();
+            return View("Create");
         }
 
         // POST: Weathers/Create

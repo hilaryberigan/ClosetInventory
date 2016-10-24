@@ -5,13 +5,16 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Threading;
 
 namespace ClosetInventory.WorkerClasses
 {
     public class WeatherSearch
     {
-        
-        public static async Task<List<List>> GetRootObject()
+        double temperature = 0;
+    
+    
+        public async Task<double> GetTemperature()
         {
             
             IPGeocoder geocoder = new IPGeocoder();
@@ -22,18 +25,35 @@ namespace ClosetInventory.WorkerClasses
             using (var client = new HttpClient())
             {
                 string repUrl = apiUrl + city + "/" + apiKey;
-
+                List<WeatherList> weatherList = null;
                 HttpResponseMessage response = await client.GetAsync(repUrl);
                 if (response.IsSuccessStatusCode)
                 {
                     string result = await response.Content.ReadAsStringAsync();
                     var rootResult = JsonConvert.DeserializeObject<WeatherInformation>(result);
-                    return rootResult.list;
+                     weatherList = rootResult.list;
                 }
-                else
+        
+
+
+             
+
+                double[] todayTemps =
                 {
-                    return null;
-                }
+                     ((weatherList[0].main.temp - 273.15) * 9/5) + 32,
+                     ((weatherList[1].main.temp - 273.15) * 9/5) + 32,
+                     ((weatherList[2].main.temp - 273.15) * 9/5) + 32,
+                     ((weatherList[3].main.temp - 273.15) * 9/5) + 32,
+                     ((weatherList[4].main.temp - 273.15) * 9/5) + 32,
+                     ((weatherList[5].main.temp - 273.15) * 9/5) + 32,
+                     ((weatherList[6].main.temp - 273.15) * 9/5) + 32,
+                     ((weatherList[7].main.temp - 273.15) * 9/5) + 32
+
+
+                };
+
+                temperature = todayTemps.Max();
+                return temperature;
             }
         }
     }

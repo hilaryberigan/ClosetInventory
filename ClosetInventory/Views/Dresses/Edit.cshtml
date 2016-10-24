@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+
 
 
 @using (Html.BeginForm("Submit", "Dresses"))
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Dress</h4>
+        <h4>Make Edits to Your Saved Items</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -79,6 +79,13 @@
                     @Html.EditorFor(model => model.HasPattern)
                     @Html.ValidationMessageFor(model => model.HasPattern, "", new { @class = "text-danger" })
                 </div>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Color, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
             </div>
         </div>
         @Html.HiddenFor(model => model.LargeFile)

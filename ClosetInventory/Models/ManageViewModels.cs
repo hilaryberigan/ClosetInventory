@@ -64,6 +64,7 @@ namespace ClosetInventory.Models
         public List<Pants> Pants { get; set; }
         public List<Shoe> Shoes { get; set; }        
         public Outfit Outfit { get; set; }
+
     }
 
 
