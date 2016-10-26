@@ -145,7 +145,7 @@ namespace ClosetInventory.WorkerClasses
 
                 int a = random.Next(0, shoes.Count);
                 shoe = shoes[a];
-                if (outfit.Shirt.Color == "black")
+                
                 return shoe;
             }
             return null;

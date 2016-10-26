@@ -2,67 +2,78 @@
 @{
     ViewBag.Title = "HomeCovers";
 }
+<center>
 
-<h2>HomeCovers</h2>
-
-@Html.Partial("_PartialUserHomePage", Model)
-@using (Html.BeginForm())
-{
-
-    <div class="form-horizontal">
-        <h4>Outfit</h4>
-        <hr />
-
-        <div class="form-group">
-            @Html.HiddenFor(model => Model.Outfit)
+    <h1 class="closet">Your Closet</h1>
+    <hr />
+    <div class="row">
+        <div class="col-sm-6">
+            @Html.Partial("_PartialUserHomePage", Model)
         </div>
+        <div class="col-sm-6">
+            
+            @Html.Partial("_PartialButtonsList", Model)
+            <h2>Your Covers</h2>
+            <div class="container gallery">
 
+                @foreach (var item in Model.Covers)
+            {
+                    <div class="col-sm-2" style="margin-left: 50px; margin-right:50px; margin-top: 5px; padding: 10px;">
+                        <div class="boxgroup">
+                            <div class="img">
+                               <a href="~/Covers/Details/@item.Id">
+                                        <img src="@item.LargeFile" id="coversImage" />
+                                    </a>
+                                </div>                            
+                      
 
+                            @*<img src="img_fjords.jpg" alt="Trolltunga Norway" width="300" height="200">*@
+                            <div class="desc">
+                                <button id="move" class="btn btn-primary" onclick="MoveCoverToOutfit('@item.Id')">Add to Outfit</button>
+                            </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Wear Outfit" class="btn btn-default" />
+                        </div>
+                    </div>
+
+                }
             </div>
         </div>
     </div>
-}
+</center>
 
-@foreach (var item in Model.Covers)
-{
-    <table>
-        <tr>
-            <td>
-                <img src="@item.SmallFile" id="coverImage" onclick="MoveCoverToOutfit(item.SmallFile)" />
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "Covers", new { id = item.Id }, null) |
-                @Html.ActionLink("Details", "Details", "Covers", new { id = item.Id }, null) |
-                @Html.ActionLink("Delete", "Delete", "Covers", new { id = item.Id }, null)
-            </td>
-        </tr>
-    </table>
-}
+
 <form action="" method="post" id="postTo">
     @Html.HiddenFor(model => model.Outfit.Id)
     @Html.HiddenFor(model => model.Outfit.UserId)
 
     <div id="itemType"></div>
 </form>
+
+
 <script type="text/javascript">
-    function MoveDressToOutfit(smallFile) {
 
-        $('#outfitPants')
-            .replaceWith('<div id="outfitPants"><img id="dress" src="#" /></div>'
-            .replace("#", smallFile));
 
-        $('#outfitShirt')
-            .replaceWith('');
+    function MoveToOutfit(id) {
+        var outfitId =  @Model.Outfit.Id;
+        var clothingType = "cover";
+        var Id = id;
+        $.ajax({
+            url: "http://localhost:6001/Home/UpdateOutfit",
+            type: "POST",
+            dataType: 'json',
+            data: {'outfitId' : outfitId, 'Id': Id, 'clothingType': clothingType },
+            success: function (){
+                location.reload();
+        }
+        });
+
     }
 
 
 
     function RenderPage(item) {
         var path = "Home" + item;
+
         $('#postTo').attr("action", path);
         $('#postTo').submit();
 

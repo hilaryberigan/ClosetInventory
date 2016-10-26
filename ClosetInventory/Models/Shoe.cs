@@ -32,6 +32,7 @@ namespace ClosetInventory.Models
         public string UserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
-
+        [Display(Name = "Last Worn")]
+        public DateTime lastWorn { get; set; }
     }
 }

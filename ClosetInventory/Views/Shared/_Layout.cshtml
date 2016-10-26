@@ -9,52 +9,59 @@
     @Scripts.Render("~/bundles/jquery")
 
 </head>
-<body>
-    <div class="navbar navbar-fixed-top" style="">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Closet Guru", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+<body >
+    <div class="navbars">
+        
+            <div class="navbar navbar-fixed-top">
+                <div class="secondary-nav ">
+                    <div class="container">
 
-                    <li>@Html.ActionLink("Add Item", "Upload", "Home")</li>
-                    <li>@Html.ActionLink("Your Closet", "UserHomePage", "Home")</li>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Shop", "Shop", "Home")</li>
+                                <li>@Html.ActionLink("See Outfit History", "Index", "Outfits")</li>
 
-                </ul>
-                @Html.Partial("_LoginPartial")
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="top-nav">
+            <div class="navbar navbar-fixed-top">
+                <div class="container" style="height: 100%;">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        @Html.ActionLink("Closet Guru", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="top-border">&#124;</li>
+                            <li>@Html.ActionLink("Add Item", "Upload", "Home")</li>
+                            <li class="top-border">&#124;</li>
+                            <li>@Html.ActionLink("Your Closet", "UserHomePage", "Home")</li>
+                            <li class="top-border">&#124;</li>
+                            <li><a class="more">More</a></li>
+                            <li class="top-border">&#124;</li>
+                        </ul>
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="navbar">
-        <div class="container">
-
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Past Outfits", "Index", "Outfits")</li>
-                   
-                    
-                 
-                </ul>
-            
-            </div>
-        </div>
-    </div>
-    <center>
+    
+    
         <div class="container body-content">
             @RenderBody()
+
             <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
+
         </div>
-    </center>
+    
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

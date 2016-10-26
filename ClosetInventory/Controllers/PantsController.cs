@@ -52,7 +52,7 @@ namespace ClosetInventory.Controllers
             if (ModelState.IsValid)
             {
                 var userId = User.Identity.GetUserId();
-                var pants = new Pants { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile, UserId = userId };
+                var pants = new Pants { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile, UserId = userId, lastWorn = DateTime.Today };
                 db.Pants.Add(pants);
                 db.SaveChanges();
                 return RedirectToAction("Edit", pants);
@@ -77,7 +77,7 @@ namespace ClosetInventory.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Submit([Bind(Include = "Id,isCapri,IsHighWaist,IsSkinny,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit,UserId")] Pants pants)
+        public ActionResult Submit([Bind(Include = "Id,isCapri,IsHighWaist,IsSkinny,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit,UserId,lastWorn")] Pants pants)
         {
             if (ModelState.IsValid)
             {

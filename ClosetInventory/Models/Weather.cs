@@ -10,7 +10,8 @@ namespace ClosetInventory.Models
     {
         [Key]
         public int? Id { get; set; }
-        public string Temperature { get; set; }
+        public double Temperature { get; set; }
         public string SkyConditions { get; set; }
+        public DateTime Date { get; set; }
     }
 }

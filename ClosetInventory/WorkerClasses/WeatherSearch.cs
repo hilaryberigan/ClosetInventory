@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Threading;
+using ClosetInventory.Models;
 
 namespace ClosetInventory.WorkerClasses
 {
@@ -32,6 +33,8 @@ namespace ClosetInventory.WorkerClasses
                     string result = await response.Content.ReadAsStringAsync();
                     var rootResult = JsonConvert.DeserializeObject<WeatherInformation>(result);
                      weatherList = rootResult.list;
+
+                    
                 }
         
 
@@ -53,6 +56,8 @@ namespace ClosetInventory.WorkerClasses
                 };
 
                 temperature = todayTemps.Max();
+                Weather WeatherModel = new Weather();
+                WeatherModel.Temperature = temperature;
                 return temperature;
             }
         }

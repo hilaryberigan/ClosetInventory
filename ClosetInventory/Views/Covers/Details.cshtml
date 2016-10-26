@@ -9,38 +9,10 @@
 <div>
     <h4>Cover</h4>
     <hr />
+    <img src="@Model.LargeFile" style="max-width: 300px; float: right;">  
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SmallFile)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SmallFile)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LargeFile)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LargeFile)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsFavorite)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsFavorite)
-        </dd>
+       
+       
 
         <dt>
             @Html.DisplayNameFor(model => model.DressinessRating)
@@ -74,17 +46,8 @@
             @Html.DisplayFor(model => model.ColorType)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsTightFit)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsTightFit)
-        </dd>
-
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
 </p>

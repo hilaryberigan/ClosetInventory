@@ -58,7 +58,7 @@ public ActionResult Create()
             if (ModelState.IsValid)
             {
                 var userId = User.Identity.GetUserId();
-                var shoe = new Shoe { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile, UserId = userId };
+                var shoe = new Shoe { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile, UserId = userId, lastWorn = DateTime.Today };
                 db.Shoes.Add(shoe);
                 db.SaveChanges();
                 return RedirectToAction("Edit", shoe);
@@ -81,7 +81,7 @@ public ActionResult Create()
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Submit([Bind(Include = "Id,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,UserId")] Shoe shoe)
+        public ActionResult Submit([Bind(Include = "Id,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,UserId,lastWorn")] Shoe shoe)
         {
             if (ModelState.IsValid)
             {

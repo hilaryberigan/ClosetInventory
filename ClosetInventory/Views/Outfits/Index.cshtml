@@ -12,12 +12,21 @@
 <table>
     @foreach (var item in Model)
     {
-        <tr>
+        <tr style="border-bottom: dotted; border-color: rgb(220,220,220)">
+            <td>
+                Date Worn:
+                <br />
+                <h4>
+                    @item.Date.ToShortDateString()
+                </h4>
+            </td>
             <td>
                     <div id="outfitCover">
                         @if (item.Cover != null)
                 {
-                            <img id="cover" src="@item.Cover.LargeFile" />
+                            <a href="~/Covers/Details/@item.Cover.Id">
+                                <img id="cover" src="@item.Cover.LargeFile" style="max-width: 200px" />
+                            </a>
                         }
                     </div>
                 </td>
@@ -25,39 +34,48 @@
                     <div id="outfitShirt">
                         @if (item.Shirt != null)
                 {
-                            <img id="shirt" src="@item.Shirt.LargeFile" />
+                            <a href="~/Shirts/Details/@item.Shirt.Id">
+                                <img id="shirt" src="@item.Shirt.LargeFile" style="max-width: 200px"/>
+                            </a>
                         }
-                    </div>
+                </div>
                 </td>
             <td>
                     <div id="outfitPants">
                         @if (item.Pants != null)
-                {
-                            <img id="pants" src="@item.Pants.LargeFile" />
+                        {
+                            <a href="~/Pants/Details/@item.Pants.Id">
+                                <img id="pants" src="@item.Pants.LargeFile" style="max-width: 200px"/>
+                            </a>
                         }
-                    </div>
+                </div>
                 </td>
+            <td>
+                <div id="outfitDress">
+                    @if (item.Dress != null && item.Shirt == null && item.Pants == null)
+                {
+
+                        <a href="~/Dresses/Details/@item.Dress.Id">
+                            <img id="shoes" src="@item.Dress.LargeFile" style="max-width: 200px"/>
+                        </a>
+                    }
+                </div>
+
+            </td>
+
+
             <td>
                     <div id="outfitShoe">
                         @if (item.Shoe != null)
-                {
-                            <img id="shoes" src="@item.Shoe.LargeFile" />
+                        {
+                            <a href="~/Shoes/Details/@item.Shoe.Id">
+                                <img id="shoes" src="@item.Shoe.LargeFile" style="max-width: 200px"/>
+                            </a>
                         }
-                    </div>
+                </div>
                 </td>
-            <td>
-                    <div id="outfitDress">
-                        @if (item.Dress != null && item.Shirt == null && item.Pants == null)
-                {
-                            <img id="shoes" src="@item.Shoe.LargeFile" />
-                        }
-                    </div>
-                
-            </td>
-            <td>
-               Date Worn: 
-                @Html.DisplayFor(modelitem => item.Date)
-            </td>
+           
             </tr>
+            
             }
     </table>

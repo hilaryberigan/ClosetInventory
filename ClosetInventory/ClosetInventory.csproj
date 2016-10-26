@@ -263,6 +263,26 @@
     <Compile Include="Migrations\201610231923503_updated clothing model.Designer.cs">
       <DependentUpon>201610231923503_updated clothing model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610251257326_last worn added.cs" />
+    <Compile Include="Migrations\201610251257326_last worn added.Designer.cs">
+      <DependentUpon>201610251257326_last worn added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610251348310_add dressiness.cs" />
+    <Compile Include="Migrations\201610251348310_add dressiness.Designer.cs">
+      <DependentUpon>201610251348310_add dressiness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610251446593_outfit id.cs" />
+    <Compile Include="Migrations\201610251446593_outfit id.Designer.cs">
+      <DependentUpon>201610251446593_outfit id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610251529582_temp.cs" />
+    <Compile Include="Migrations\201610251529582_temp.Designer.cs">
+      <DependentUpon>201610251529582_temp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610251532296_weather.cs" />
+    <Compile Include="Migrations\201610251532296_weather.Designer.cs">
+      <DependentUpon>201610251532296_weather.cs</DependentUpon>
+    </Compile>
     <Compile Include="WorkerClasses\ColorCalculator.cs" />
     <Compile Include="WorkerClasses\ImageManager.cs" />
     <Compile Include="Migrations\201610122022446_initial clothing test.cs" />
@@ -312,6 +332,8 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\dresses-53319_1280.jpg" />
+    <Content Include="Content\images.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -421,6 +443,9 @@
     <Content Include="Views\Home\HomeShoes.cshtml" />
     <Content Include="Views\Home\HomeSkirts.cshtml" />
     <Content Include="Views\Home\Shop.cshtml" />
+    <Content Include="Views\Shared\_PartialButtonsList.cshtml" />
+    <Content Include="Views\Home\ChoicePage.cshtml" />
+    <Content Include="Views\Shared\_UnsignedHome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -461,6 +486,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610231923503_updated clothing model.resx">
       <DependentUpon>201610231923503_updated clothing model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610251257326_last worn added.resx">
+      <DependentUpon>201610251257326_last worn added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610251348310_add dressiness.resx">
+      <DependentUpon>201610251348310_add dressiness.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610251446593_outfit id.resx">
+      <DependentUpon>201610251446593_outfit id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610251529582_temp.resx">
+      <DependentUpon>201610251529582_temp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610251532296_weather.resx">
+      <DependentUpon>201610251532296_weather.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

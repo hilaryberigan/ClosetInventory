@@ -1,0 +1,46 @@
+﻿@model ClosetInventory.Models.ChoiceViewModel
+@{
+    ViewBag.Title = "ChoicePage";
+}
+
+
+<center>
+<h1>
+    Change Your Dressiness Setting
+</h1>
+<h2>
+    What Type of Outfit Would You Like?
+</h2>
+    <br />
+    <br />
+
+    <div class="buttons">
+        <button type="button" class="btn btn-primary" onclick="SubmitDressiness('dressy')">Dressy</button>
+        <button type="button" class="btn btn-primary" onclick="SubmitDressiness('business casual')">Business Casual</button>
+        <button type="button" class="btn btn-primary" onclick="SubmitDressiness('casual')">Casual</button>
+        <br />
+    </div>
+    <br />
+    <br />
+
+            @Html.ActionLink("Back To Closet", "UserHomePage", "Home")
+</center>
+        <script type="text/javascript">
+            function SubmitDressiness(id) {
+                var choiceId = "" + id;
+                $.ajax({
+                    url: "http://localhost:6001/Home/ChooseDressiness",
+                    type: "POST",
+                    dataType: 'json',
+                    data: {'Id': choiceId },
+                    success: function (){
+                        location.reload();
+                    }
+                });
+                $('#buttons').replaceWith('<div class="buttons"><h4>Changed!</h4></div>'); 
+    
+            }
+
+        </script>
+
+

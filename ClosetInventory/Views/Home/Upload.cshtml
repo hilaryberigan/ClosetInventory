@@ -4,7 +4,7 @@
     ViewBag.Title = "Upload a Picture";
 }
 
-<h2>Upload a File</h2>
+<h1>Upload a File</h1>
 
 
 @{
@@ -28,15 +28,23 @@
     Model.LargeFile = largeFile;
 }*@
 
-<h1>Image</h1>
+
 
 <form action="@Url.Action("SetImageType", "Home")" method="post" enctype="multipart/form-data" name="file"> 
     @*@Html.AntiForgeryToken()*@
     <fieldset>
         <label for="file">Image</label>
-        <input type="file" name="file" onchange="ShowPicture(this)" />
-        <img id="image" src="#" />
-        <input type="submit" value="Upload" />
+        <div class="row">
+            <div class="col-sm-3">
+                <input type="file" name="file" onchange="ShowPicture(this)" />
+            </div>
+            <div class="col-sm-9">
+                <img id="image" src="~/Content/Imagess/images.png" />
+            </div>
+        </div>
+        <br />
+        <br />
+        <input type="submit" value="Upload" class="btn btn-primary" />
     </fieldset>
 </form>
 

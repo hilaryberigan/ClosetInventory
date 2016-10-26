@@ -3,45 +3,60 @@
 
 <center>
     <h2>Today's Outfit Suggestion</h2>
+
+    <h4>Dressiness Setting: @Model.Dressiness</h4>
+    <a href="ChoicePage"><h5>To Change This Click Here</h5></a>
+    <br />
     <script src="/Scripts/jquery-1.10.2.js"></script>
-    <div id="outfitImages">
-        <div id="outfitCover">
+    <div class="outfitImages" >
+        @using (Html.BeginForm())
+        {
+
+
+                @*<div class="form-group">
+                    @Html.HiddenFor(Model.Outfit.Cover.LargeFile)
+                </div>*@
+
+
+
+                <div class="form-group">
+                        <input type="submit" value="Wear Outfit" class="btn btn-default" /> 
+                </div>
+
+
+        <div class="outfitCover">
             @if (Model.Outfit.Cover != null)
             {
-                <img id="cover" src="@Model.Outfit.Cover.LargeFile" />
+                <img id="outfit" src="@Model.Outfit.Cover.LargeFile" />
             }
         </div>
         <div id="outfitShirt">
             @if (Model.Outfit.Shirt != null)
             {
-                <img id="shirt" src="@Model.Outfit.Shirt.LargeFile" />
+                <img id="outfit" src="@Model.Outfit.Shirt.LargeFile" />
             }
         </div>
         <div id="outfitPants">
             @if (Model.Outfit.Pants != null)
             {
-                <img id="pants" src="@Model.Outfit.Pants.LargeFile" />
+                <img id="outfit" src="@Model.Outfit.Pants.LargeFile" />
             }
         </div>
         <div id="outfitShoe">
             @if (Model.Outfit.Shoe != null)
             {
-                <img id="shoes" src="@Model.Outfit.Shoe.LargeFile" />
+                <img class="outfit" id="shoes" src="@Model.Outfit.Shoe.LargeFile"/>
             }
         </div>
         <div id="outfitDress">
             @if (Model.Outfit.Dress != null && Model.Outfit.Shirt == null && Model.Outfit.Pants == null)
             {
-                <img id="shoes" src="@Model.Outfit.Shoe.LargeFile" />
+                <img id="outfit" src="@Model.Outfit.Shoe.LargeFile" />
             }
         </div>
+        }
     </div>
-    <button type="button" onclick="RenderPage('Dresses')">Dresses</button>
-    <button type="button" onclick="RenderPage('Pants')">Pants</button>
-    @*<button type="button" onclick="RenderPage('Skirts')">Skirts</button>*@
-    <button type="button" onclick="RenderPage('Shirts')">Shirts</button>
-    <button type="button" onclick="RenderPage('Shoes')">Shoes</button>
-    <button type="button" onclick="RenderPage('Covers')">Covers</button>
+        
 </center>
 
 
