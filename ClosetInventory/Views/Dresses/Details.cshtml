@@ -4,87 +4,58 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Dress</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.isLong)
-        </dt>
+    <div class="row">
+        <div class="col-sm-2">
+            <img src="@Model.LargeFile" />
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.isLong)
-        </dd>
+            <div class="col-sm-10">
+                <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SmallFile)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SmallFile)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DressinessRating)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LargeFile)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DressinessRating)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.LargeFile)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.WarmthRating)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsFavorite)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.WarmthRating)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsFavorite)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Color)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DressinessRating)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Color)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DressinessRating)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ColorType)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.WarmthRating)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ColorType)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.WarmthRating)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Color)
-        </dt>
+                </dl>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Color)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ColorType)
-        </dt>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ColorType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsTightFit)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsTightFit)
-        </dd>
-
-    </dl>
-</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Closet", "UserHomePage", "Home") |
+    @Html.ActionLink("Delete This Item", "Delete", "Dresses")
+    
 </p>

@@ -6,7 +6,8 @@ using System.Web.Mvc;
 using ClosetInventory.Models;
 using System.IO;
 using Microsoft.AspNet.Identity;
-
+using Nager.AmazonProductAdvertising;
+using Nager.AmazonProductAdvertising.Model;
 using ClosetInventory.WorkerClasses;
 using System.Threading.Tasks;
 
@@ -16,60 +17,107 @@ namespace ClosetInventory.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
+        [Authorize]
         public ActionResult ChoicePage()
-        {
-            var userId = User.Identity.GetUserId();
-            var user = db.Users.Where(m => m.Id == userId).FirstOrDefault();
-            ChoiceViewModel model = new ChoiceViewModel();
-
-            model.Choice = user.Dressiness;
-            return View(model);
-        }
-
-        //Get:
-        [HttpPost]
-        public ActionResult ChooseDressiness(string Id)
         {
             DateTime date = DateTime.Today;
             var userId = User.Identity.GetUserId();
-            var weather = db.Weathers.Where(m => m.Date == date).FirstOrDefault();
-
-            double temperature = 70;
-                try
-            {
-                temperature = weather.Temperature;
-            }
-            catch { };
             var user = db.Users.Where(m => m.Id == userId).FirstOrDefault();
-            var Outfits = db.Outfits.Where(n => n.UserId == userId).ToList();
-
-            var outfit = Outfits.Where(m => m.Id == user.CurrentOutfitId).FirstOrDefault();
-
-
-            if (outfit != null && user.Dressiness != Id)
+            TotalViewModel model = new TotalViewModel();
+            model.User = user;
+        
+            Outfit outfit = db.Outfits.Where(m => m.Id == model.User.CurrentOutfitId && m.Date == date).FirstOrDefault();
+            if (outfit != null)
             {
-                user.Dressiness = Id;
-
-                OutfitGenerator og = new OutfitGenerator();
-                Outfit Outfit = og.MakeOutfit(user, db, temperature, Id);
-                user.CurrentOutfitId = outfit.Id;
-                db.Outfits.Add(outfit);
+                model.Outfit = outfit;
+                if (user.Dressiness != null)
+                {
+                    model.Dressiness = outfit.OccasionRating;
+                }
             }
+            model.Outfit = null;
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ChoicePage(TotalViewModel model)
+        {
+            model.Dressiness = model.Dressiness.ToLower();
+            OutfitGenerator og = new OutfitGenerator();
+            model = await og.AddOutfitToViewModel(db, model);
+            var user = db.Users.Where(m => m.Id == model.User.Id).FirstOrDefault();
+            user.CurrentOutfitId = model.Outfit.Id;
+            user.Dressiness = model.Dressiness;
+            db.Users.Attach(user);
+            var entry = db.Entry(user);
+            entry.Property(e => e.CurrentOutfitId).IsModified = true;
+            entry.Property(f => f.Dressiness).IsModified = true;
+
+            db.SaveChanges();
+
+            return View(model);
+
+        }
+
+        //Get:
+        //[HttpPost]
+        //public ActionResult ChooseDressiness(string Id)
+        //{
+        //    DateTime date = DateTime.Today;
+        //    var userId = User.Identity.GetUserId();
+        //    var weather = db.Weathers.Where(m => m.Date == date).FirstOrDefault();
+
+        //    double temperature = 70;
+        //        try
+        //    {
+        //        temperature = weather.Temperature;
+        //    }
+        //    catch { };
+        //    var user = db.Users.Where(m => m.Id == userId).FirstOrDefault();
+        //    var Outfits = db.Outfits.Where(n => n.UserId == userId).ToList();
+
+        //    var outfit = Outfits.Where(m => m.Id == user.CurrentOutfitId).FirstOrDefault();
 
 
+        //    if (outfit != null && user.Dressiness != Id)
+        //    {
+        //        user.Dressiness = Id;
 
-            return Json(String.Format("'Success': 'true'"));
+        //        OutfitGenerator og = new OutfitGenerator();
+        //        Outfit Outfit = og.MakeOutfit(user, db, temperature, Id);
+        //        user.CurrentOutfitId = outfit.Id;
+        //        db.Outfits.Add(outfit);
+        //    }
+        //    return Json(String.Format("'Success': 'true'"));
+        //}
+        public ActionResult SearchAmazon()
+        {
+            AmazonSearchModel model = new AmazonSearchModel();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult SearchAmazon(AmazonSearchModel model)
+        {
+            AmazonSearcher searcher = new AmazonSearcher();
+            model.Response = searcher.GetAmazonResults(model.KeywordSearch, model.IndexSearch);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ChooseOutfit(TotalViewModel model)
+        {
+
+            return RedirectToAction("UserHomePage");
         }
 
         [Authorize]
         public async Task<ActionResult> UserHomePage()
         {
-            
-            WeatherSearch weather = new WeatherSearch();        
+     
             var userId = User.Identity.GetUserId();
             TotalViewModel model = new TotalViewModel();
             DateTime date = DateTime.Today;
-            model.Dressiness = "business casual";
+
+
             model.User = db.Users.Where(m => m.Id == userId).FirstOrDefault();
             model.Covers = db.Covers.Where(m => m.UserId == userId).ToList();
             model.Pants = db.Pants.Where(m => m.UserId == userId).ToList();
@@ -77,37 +125,31 @@ namespace ClosetInventory.Controllers
             model.Skirts = db.Skirts.Where(m => m.UserId == userId).ToList();
             model.Shirts = db.Shirts.Where(m => m.UserId == userId).ToList();
             model.Dresses = db.Dresses.Where(n => n.UserId == userId).ToList();
-            if (model.User.Dressiness != null)
-            {
-                model.Dressiness = model.User.Dressiness;
-            }
-            model.Dresses = (from b in db.Dresses where b.UserId == userId select b).ToList();
 
-            var Outfits = db.Outfits.Where(n => n.UserId == userId).ToList();
-
-            var outfit = Outfits.Where(m=>m.Id == model.User.CurrentOutfitId || m.Date == date).FirstOrDefault();
-
-            if (outfit != null)
-            {
-                model.Outfit = outfit;
-                model.User.CurrentOutfitId = outfit.Id;
-            }
-           
-            else
-            {
-                var temperature = weather.GetTemperature();
-                var temp = await temperature;
-
-                OutfitGenerator og = new OutfitGenerator();
-                model.Outfit = og.MakeOutfit(model.User, db, temp, model.Dressiness);
-            }
-
-            
+            model.Outfit = db.Outfits.Where(m => m.Id == model.User.CurrentOutfitId).FirstOrDefault();
             return View(model);
+         
         }
-        
 
-   
+        [HttpPost]
+        public async Task<ActionResult> UserHomePage(TotalViewModel model)
+        {
+            var userId = User.Identity.GetUserId();
+            DateTime date = DateTime.Today;
+
+
+            model.User = db.Users.Where(m => m.Id == userId).FirstOrDefault();
+            model.Covers = db.Covers.Where(m => m.UserId == userId).ToList();
+            model.Pants = db.Pants.Where(m => m.UserId == userId).ToList();
+            model.Shoes = db.Shoes.Where(m => m.UserId == userId).ToList();
+            model.Skirts = db.Skirts.Where(m => m.UserId == userId).ToList();
+            model.Shirts = db.Shirts.Where(m => m.UserId == userId).ToList();
+            model.Dresses = db.Dresses.Where(n => n.UserId == userId).ToList();
+
+            return View(model);
+        }  
+
+          
         public ActionResult HomeCovers(TotalViewModel model)
         {
             model.Outfit = db.Outfits.Include("Pants").Include("Skirt").Include("Shirt").Include("Cover").Include("Shoe").Include("Dress").Where(m => m.Id == model.Outfit.Id).FirstOrDefault();
@@ -143,8 +185,6 @@ namespace ClosetInventory.Controllers
 
             switch (clothingType)
             {
-
-
                 case "pants":
                     outfit.Pants = db.Pants.Where(m => m.Id == Id).FirstOrDefault();
                     outfit.PantsId = Id;
@@ -174,7 +214,6 @@ namespace ClosetInventory.Controllers
                 default:
                     break;
             }
-
 
 
             db.SaveChanges();            

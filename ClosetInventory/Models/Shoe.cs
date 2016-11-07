@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ClosetInventory.Models
 {
@@ -34,5 +35,14 @@ namespace ClosetInventory.Models
 
         [Display(Name = "Last Worn")]
         public DateTime lastWorn { get; set; }
+
+        [Display(Name = "Color Type")]
+        public IEnumerable<SelectListItem> ColorTypes { get; set; }
+
+        [Display(Name = "Occasion Type (How Dressy is the Item)")]
+        public IEnumerable<SelectListItem> Dressiness { get; set; }
+
+        [Display(Name = "Temperature of Where You'll Wear the Item")]
+        public IEnumerable<SelectListItem> WarmthType { get; set; }
     }
 }

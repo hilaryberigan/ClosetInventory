@@ -11,6 +11,11 @@ namespace ClosetInventory.Models
     {
         public string Dressiness { get; set; }
         public int? CurrentOutfitId { get; set; }
+
+        public int? CasualOutfitId { get; set; }
+
+        public int? DressyOutfitId { get; set; }
+        public int? BusinessCasualOutfitId { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
           
@@ -39,7 +44,10 @@ namespace ClosetInventory.Models
         public DbSet<Shirt> Shirts { get; set; }
         public DbSet<Outfit> Outfits { get; set; }
         public DbSet<Dress> Dresses { get; set; }
+    
 
-        public System.Data.Entity.DbSet<ClosetInventory.Models.Weather> Weathers { get; set; }
+        public DbSet<Weather> Weathers { get; set; }
+
+        public DbSet<WishListItem> WishListItems { get; set; }
     }
 }

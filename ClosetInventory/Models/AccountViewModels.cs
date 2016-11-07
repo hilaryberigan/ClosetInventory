@@ -12,7 +12,8 @@ namespace ClosetInventory.Models
 
     public class ChoiceViewModel
     {
-        public string Choice { get; set; }
+        
+
     }
     public class ExternalLoginListViewModel
     {

@@ -1,0 +1,70 @@
+﻿@model ClosetInventory.Models.AmazonSearchModel
+
+@{
+    ViewBag.Title = "SearchAmazon";
+}
+
+
+
+
+
+<h1>Shop</h1>
+<h3>Search Amazon for Clothing Items</h3>
+<hr />
+<form action="/Home/SearchAmazon" method="post">
+    <div class="container heading-box">
+        <div class="row">
+            <div class="col-sm-3">
+                Search:<br>
+                <SELECT NAME="IndexSearch" id="IndexSearch" class="form-control input-lg" value>
+                    <OPTION VALUE="0" selected>All Products</OPTION>
+                    <OPTION VALUE="1"> Apparel</OPTION>
+                    <OPTION VALUE="4">Beauty</OPTION>
+                    <OPTION VALUE="18">Jewelry</OPTION>
+                    <OPTION VALUE="23">Miscellaneous</OPTION>
+                    <OPTION VALUE="35">Sporting Goods</OPTION>
+                </SELECT>
+                <br><br>
+            </div>
+            Keywords:<br>
+            <div class="col-sm-3" style="padding: 0px">
+                <INPUT type="text" name="KeywordSearch" id="KeywordSearch" placeholder="Search Amazon" class="form-control input-lg" style="width: 100%; margin-right: 0px">
+            </div>
+            <div class="col-sm-2" style="padding: 0px">
+                <button class="btn btn-info btn-lg" type="submit" style="position: relative">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+        </div>
+        </div>
+</form>
+
+<form action="~/WishListItems/CreateWishListItem" method="post">
+    @if (Model.Response != null)
+    {
+        foreach (var item in Model.Response.Items.Item.ToList())
+        {
+            <div class="row">
+                <a href='@item.DetailPageURL'><img src='@item.MediumImage' /></a>
+                <a href='@item.DetailPageURL'>@item.ItemAttributes.Title</a>
+                <input type="hidden" value="@item" id="Item" name="Item" />
+                <input type="submit" class="btn btn-primary" value="Save To WishList" />
+
+            </div>
+
+        }
+    }
+</form>
+
+
+
+@section Scripts {
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="~/scripts/pagination.js"></script>
+ 
+
+}
+
+
+
+

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using Nager.AmazonProductAdvertising.Model;
 
 namespace ClosetInventory.Models
 {
@@ -68,7 +69,14 @@ namespace ClosetInventory.Models
 
     }
 
+    public class AmazonSearchModel
+    {
 
+        public string KeywordSearch { get; set; }
+        public int IndexSearch { get; set; }
+        public AmazonItemResponse Response { get; set; }
+        public Item Item { get; set; }
+    }
     public class ManageLoginsViewModel
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }

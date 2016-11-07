@@ -109,6 +109,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Nager.AmazonProductAdvertising, Version=1.0.17.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nager.AmazonProductAdvertising.1.0.17\lib\net45\Nager.AmazonProductAdvertising.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nager.ArticleNumber, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nager.ArticleNumber.1.0.1\lib\net45\Nager.ArticleNumber.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -244,6 +252,7 @@
     <Compile Include="Controllers\ShoesController.cs" />
     <Compile Include="Controllers\SkirtsController.cs" />
     <Compile Include="Controllers\WeathersController.cs" />
+    <Compile Include="Controllers\WishListItemsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -283,6 +292,48 @@
     <Compile Include="Migrations\201610251532296_weather.Designer.cs">
       <DependentUpon>201610251532296_weather.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610282057153_color types list.cs" />
+    <Compile Include="Migrations\201610282057153_color types list.Designer.cs">
+      <DependentUpon>201610282057153_color types list.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611021626026_wishlistitem.cs" />
+    <Compile Include="Migrations\201611021626026_wishlistitem.Designer.cs">
+      <DependentUpon>201611021626026_wishlistitem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611021703544_wishlistupdate.cs" />
+    <Compile Include="Migrations\201611021703544_wishlistupdate.Designer.cs">
+      <DependentUpon>201611021703544_wishlistupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611021842389_wishlistupdate2.cs" />
+    <Compile Include="Migrations\201611021842389_wishlistupdate2.Designer.cs">
+      <DependentUpon>201611021842389_wishlistupdate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611031519321_added selectlists.cs" />
+    <Compile Include="Migrations\201611031519321_added selectlists.Designer.cs">
+      <DependentUpon>201611031519321_added selectlists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611031528141_selectlists to shoe.cs" />
+    <Compile Include="Migrations\201611031528141_selectlists to shoe.Designer.cs">
+      <DependentUpon>201611031528141_selectlists to shoe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611031810158_test.cs" />
+    <Compile Include="Migrations\201611031810158_test.Designer.cs">
+      <DependentUpon>201611031810158_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611031810531_occasion.cs" />
+    <Compile Include="Migrations\201611031810531_occasion.Designer.cs">
+      <DependentUpon>201611031810531_occasion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611031906398_user on weather.cs" />
+    <Compile Include="Migrations\201611031906398_user on weather.Designer.cs">
+      <DependentUpon>201611031906398_user on weather.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611032132379_user outfit ids.cs" />
+    <Compile Include="Migrations\201611032132379_user outfit ids.Designer.cs">
+      <DependentUpon>201611032132379_user outfit ids.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WishListItem.cs" />
+    <Compile Include="WorkerClasses\AmazonSearcher.cs" />
     <Compile Include="WorkerClasses\ColorCalculator.cs" />
     <Compile Include="WorkerClasses\ImageManager.cs" />
     <Compile Include="Migrations\201610122022446_initial clothing test.cs" />
@@ -332,12 +383,16 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\dresses-53319_1280.jpg" />
     <Content Include="Content\images.png" />
+    <Content Include="Content\Imagess\dresses-53319_1280.jpg" />
+    <Content Include="Content\Imagess\hangers.jpg" />
+    <Content Include="Content\Imagess\images.png" />
+    <Content Include="Content\Imagess\Logomakr_6arwbw.png" />
+    <Content Include="Content\Imagess\Logomakr_6y8xrv.png" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -442,10 +497,16 @@
     <Content Include="Views\Home\HomeShirts.cshtml" />
     <Content Include="Views\Home\HomeShoes.cshtml" />
     <Content Include="Views\Home\HomeSkirts.cshtml" />
-    <Content Include="Views\Home\Shop.cshtml" />
     <Content Include="Views\Shared\_PartialButtonsList.cshtml" />
     <Content Include="Views\Home\ChoicePage.cshtml" />
     <Content Include="Views\Shared\_UnsignedHome.cshtml" />
+    <Content Include="Views\Home\SearchAmazon.cshtml" />
+    <Content Include="Views\Shoes\SuggestedShop.cshtml" />
+    <Content Include="Views\WishListItems\CreateWishListItem.cshtml" />
+    <Content Include="Views\WishListItems\Delete.cshtml" />
+    <Content Include="Views\WishListItems\Details.cshtml" />
+    <Content Include="Views\WishListItems\Edit.cshtml" />
+    <Content Include="Views\WishListItems\WishListIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -501,6 +562,36 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610251532296_weather.resx">
       <DependentUpon>201610251532296_weather.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610282057153_color types list.resx">
+      <DependentUpon>201610282057153_color types list.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611021626026_wishlistitem.resx">
+      <DependentUpon>201611021626026_wishlistitem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611021703544_wishlistupdate.resx">
+      <DependentUpon>201611021703544_wishlistupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611021842389_wishlistupdate2.resx">
+      <DependentUpon>201611021842389_wishlistupdate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611031519321_added selectlists.resx">
+      <DependentUpon>201611031519321_added selectlists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611031528141_selectlists to shoe.resx">
+      <DependentUpon>201611031528141_selectlists to shoe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611031810158_test.resx">
+      <DependentUpon>201611031810158_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611031810531_occasion.resx">
+      <DependentUpon>201611031810531_occasion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611031906398_user on weather.resx">
+      <DependentUpon>201611031906398_user on weather.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611032132379_user outfit ids.resx">
+      <DependentUpon>201611032132379_user outfit ids.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

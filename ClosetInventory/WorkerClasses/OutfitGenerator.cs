@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ClosetInventory.Models;
+using System.Threading.Tasks;
 
 namespace ClosetInventory.WorkerClasses
 {
@@ -18,7 +19,55 @@ namespace ClosetInventory.WorkerClasses
     }
     public class OutfitGenerator
     {
-        string[] badWithRed =
+        public async Task<TotalViewModel> AddOutfitToViewModel(ApplicationDbContext db, TotalViewModel model)
+        {
+
+            string userId = model.User.Id;
+            WeatherSearch weather = new WeatherSearch();
+            Weather weatherModel = new Weather();
+            DateTime date = DateTime.Today;
+            var temp = 70.0;
+
+            weatherModel = db.Weathers.Where(m => m.UserId == userId && m.Date == date).FirstOrDefault();
+
+            if (weatherModel != null)
+            {
+                temp = weatherModel.Temperature;
+            }
+            else {
+
+                weatherModel = new Weather();
+
+
+                model.Covers = db.Covers.Where(m => m.UserId == userId).ToList();
+                model.Pants = db.Pants.Where(m => m.UserId == userId).ToList();
+                model.Shoes = db.Shoes.Where(m => m.UserId == userId).ToList();
+                model.Skirts = db.Skirts.Where(m => m.UserId == userId).ToList();
+                model.Shirts = db.Shirts.Where(m => m.UserId == userId).ToList();
+                model.Dresses = db.Dresses.Where(n => n.UserId == userId).ToList();
+
+                //finds outfits from today with currentoutfitid
+
+
+                var temperature = weather.GetTemperature(weatherModel);
+                temp = await temperature;
+                weatherModel.Temperature = temp;
+                weatherModel.Date = date;
+                db.Weathers.Add(weatherModel);
+                db.SaveChanges();
+            }
+
+            model.Outfit = MakeOutfit(model.User, db, temp, model.Dressiness);
+            
+      
+            
+            return model;
+
+
+            }
+
+
+            string[] badWithRed =
         {
             "green",
             "orange",
@@ -97,22 +146,26 @@ namespace ClosetInventory.WorkerClasses
         {
             Random random = new Random();
             Cover cover = new Cover();
-            if (covers.Count > 0)
-            {
-                if (outfit.Shirt != null)
+            try {
+                if (covers.Count > 0)
                 {
-                    var oppositeCovers = covers.Where(m => m.ColorType != outfit.Shirt.ColorType && m.Color != outfit.Shirt.Color).ToList();
-                    int a = random.Next(0, oppositeCovers.Count);
-                    cover = oppositeCovers[a];
+                    if (outfit.Shirt != null)
+                    {
+                        var oppositeCovers = covers.Where(m => m.ColorType != outfit.Shirt.ColorType && m.Color != outfit.Shirt.Color).ToList();
+                        int a = random.Next(0, oppositeCovers.Count);
+                        cover = oppositeCovers[a];
+                    }
+                    else if (outfit.Dress != null)
+                    {
+                        var oppositeCovers = covers.Where(m => m.ColorType != outfit.Dress.ColorType && m.Color != outfit.Dress.Color).ToList();
+                        int a = random.Next(0, oppositeCovers.Count);
+                        cover = oppositeCovers[a];
+                    }
+                    return cover;
                 }
-                else if (outfit.Dress != null)
-                {
-                    var oppositeCovers = covers.Where(m => m.ColorType != outfit.Dress.ColorType && m.Color != outfit.Dress.Color).ToList();
-                    int a = random.Next(0, oppositeCovers.Count);
-                    cover = oppositeCovers[a];
-                }
-                return cover;
+                return null;
             }
+            catch { }
             return null;
         }
 
@@ -120,34 +173,43 @@ namespace ClosetInventory.WorkerClasses
         {
             Random random = new Random();
             Pants pants = new Pants();
-            if (pantsList.Count > 0)
+            try
             {
-                var oppositePants = pantsList.Where(m => m.ColorType != outfit.Shirt.ColorType && m.Color != outfit.Shirt.Color).ToList();
-                int a = random.Next(0, oppositePants.Count);
-                pants = oppositePants[a];
+                if (pantsList.Count > 0)
+                {
+                    var oppositePants = pantsList.Where(m => m.ColorType != outfit.Shirt.ColorType && m.Color != outfit.Shirt.Color).ToList();
+                    int a = random.Next(0, oppositePants.Count);
+                    pants = oppositePants[a];
 
-                return pants;
+                    return pants;
+                }
+                return null;
             }
+            catch { }
             return null;
-        }
+          }
         public Shoe GetShoes(Outfit outfit, List<Shoe> shoes)
         {
             Random random = new Random();
             Shoe shoe = new Shoe();
-
-            if (shoes.Count > 0)
+            try
             {
-                if (outfit.Cover.Color == "black" || outfit.Pants.Color == "black")
+                if (shoes.Count > 0)
                 {
-                    shoes = shoes.Where(m => m.Color != "brown" || m.Color != "lightbrown" || m.Color != "darkbrown").ToList();
-                }
-                shoes = shoes.Where(m => m.ColorType != outfit.Shirt.ColorType).ToList();
+                    if (outfit.Cover.Color == "black" || outfit.Pants.Color == "black")
+                    {
+                        shoes = shoes.Where(m => m.Color != "brown" || m.Color != "lightbrown" || m.Color != "darkbrown").ToList();
+                    }
+                    shoes = shoes.Where(m => m.ColorType != outfit.Shirt.ColorType).ToList();
 
-                int a = random.Next(0, shoes.Count);
-                shoe = shoes[a];
-                
-                return shoe;
+                    int a = random.Next(0, shoes.Count);
+                    shoe = shoes[a];
+
+                    return shoe;
+                }
+                return null;
             }
+            catch { };
             return null;
         }
 
@@ -155,7 +217,7 @@ namespace ClosetInventory.WorkerClasses
         public Outfit MakeOutfit(ApplicationUser user, ApplicationDbContext db, double temperature, string outfitType)
         {
             Random random = new Random();
-            Outfit Outfit = new Outfit();
+            Outfit outfit = new Outfit();
             Collections collections = new Collections();
 
             collections.Covers = (from x in db.Covers where x.UserId == user.Id select x).ToList();
@@ -191,7 +253,7 @@ namespace ClosetInventory.WorkerClasses
             }
 
 
-            try {
+            
                 if (collections.Shirts.Count > 0)
                 {
                     int i = random.Next(0, 10);
@@ -199,21 +261,21 @@ namespace ClosetInventory.WorkerClasses
                     if (i != 1)
                     {
                         int e = random.Next(0, collections.Shirts.Count);
-                        Outfit.Shirt = collections.Shirts[e];
+                        outfit.Shirt = collections.Shirts[e];
 
-                        Outfit.Pants = GetPants(Outfit, collections.PantsList);
+                        outfit.Pants = GetPants(outfit, collections.PantsList);
                     }
                     else
                     {
                         if (collections.Dresses.Count > 0)
                         {
                             int e = random.Next(0, collections.Dresses.Count);
-                            Outfit.Dress = collections.Dresses[e];
+                            outfit.Dress = collections.Dresses[e];
                         }
                         else
                         {
                             int e = random.Next(0, collections.Shirts.Count);
-                            Outfit.Shirt = collections.Shirts[e];
+                            outfit.Shirt = collections.Shirts[e];
                         }
                     }
 
@@ -222,27 +284,24 @@ namespace ClosetInventory.WorkerClasses
                 else if (collections.Dresses.Count > 0)
                 {
                     int e = random.Next(0, collections.Dresses.Count);
-                    Outfit.Dress = collections.Dresses[e];
+                    outfit.Dress = collections.Dresses[e];
                 }
 
 
-                if (Outfit.Shirt != null || Outfit.Dress != null)
+                if (outfit.Shirt != null || outfit.Dress != null)
                 {
-                    Outfit.Cover = GetCover(Outfit, collections.Covers);
-                    Outfit.Shoe = GetShoes(Outfit, collections.Shoes);
-                    Outfit.Date = DateTime.Today.Date;
-                    Outfit.UserId = user.Id;
-                    db.Outfits.Add(Outfit);
+                    outfit.Cover = GetCover(outfit, collections.Covers);
+                    outfit.Shoe = GetShoes(outfit, collections.Shoes);
+                    outfit.Date = DateTime.Today.Date;
+                    outfit.UserId = user.Id;
+                    db.Outfits.Add(outfit);
                     db.SaveChanges();
                 }
 
-                
-            }
-            catch(Exception e)
-            {
+            return outfit;
+        }
 
-            }
-            return Outfit;
+
+            
         }
     }
-}

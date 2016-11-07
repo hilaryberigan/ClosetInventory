@@ -11,7 +11,23 @@
 <hr />
 <div class="row">
     <div class="col-sm-6">
+        @if (Model.Outfit != null)
+        {
+            <h2>Today's Outfit Suggestion</h2>
+            <h4>Dressiness Setting: @Model.Dressiness</h4>
+            <a href="ChoicePage"><h5>To Change This Click Here</h5></a>
+
+
+            <div class="form-group">
+                <input type="submit" value="Wear Outfit" class="btn btn-default" />
+            </div>
+            <br />
         @Html.Partial("_PartialUserHomePage", Model)
+        }
+        else
+        {
+            <a href="ChoicePage"><h5>Click Here to Get Today's Outfit</h5></a>
+        }
     </div>
 
     <div class="col-sm-6">

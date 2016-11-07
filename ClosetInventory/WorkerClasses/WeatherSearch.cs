@@ -12,12 +12,14 @@ namespace ClosetInventory.WorkerClasses
 {
     public class WeatherSearch
     {
-        double temperature = 0;
+        double temperature = 70;
     
     
-        public async Task<double> GetTemperature()
+        public async Task<double> GetTemperature(Weather weatherModel)
         {
-            
+    
+            if (weatherModel.Date != DateTime.Today)
+            { 
             IPGeocoder geocoder = new IPGeocoder();
             string apiUrl = "http://api.openweathermap.org/data/2.5/forecast?q=";
             string city = await geocoder.GetCityNameOfIP();
@@ -54,12 +56,13 @@ namespace ClosetInventory.WorkerClasses
 
 
                 };
-
+               
                 temperature = todayTemps.Max();
-                Weather WeatherModel = new Weather();
-                WeatherModel.Temperature = temperature;
-                return temperature;
+                weatherModel.Temperature = temperature;
+                }
+                
             }
+            return weatherModel.Temperature;
         }
     }
 }

@@ -32,11 +32,20 @@ namespace ClosetInventory.WorkerClasses
     }
     public class IPGeocoder
     {
+        string IP = String.Empty;
+        string city = "";
         public async Task<string> GetCityNameOfIP()
         {
-            var rootObject = await GetLocationOfIP();
-            string city = rootObject.city;
-            return city;
+            if (city == "")
+            {
+                var rootObject = await GetLocationOfIP();
+                city = rootObject.city;
+                return city;
+            }
+            else
+            {
+                return city;
+            }
         }
 
         public async Task<IPRootObject> GetLocationOfIP()
@@ -63,7 +72,7 @@ namespace ClosetInventory.WorkerClasses
 
         public string GetUserIP()
         {
-            string IP = String.Empty;
+            
             HttpRequest http = HttpContext.Current.Request;
 
            

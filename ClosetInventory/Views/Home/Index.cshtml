@@ -1,16 +1,88 @@
 ﻿
-<div class="row homeheader">
-    <img src="Content\Imagess\dresses-53319_1280.jpg" style="width: 100%; height: auto; margin-top: 100px;"/>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 
-</div>
-<div class="row">
-    <h1 class="closet" style="color: white">Super AWESOME home page!</h1>
-    <div class="col-sm-3">
+</head>
+<body>
+    @*<div class="hometitle">
+        <div class="top-nav">
+            <div class="navbar navbar-fixed-top">
+                <div class="container" style="height: 100%;">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/"><img src="~/Content/Imagess/Logomakr_6y8xrv.png" style="height: 50px" /></a>
 
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="top-border">&#124;</li>
+                            <li>@Html.ActionLink("Add Item", "Upload", "Home")</li>
+                            <li class="top-border">&#124;</li>
+                            <li>@Html.ActionLink("Your Closet", "UserHomePage", "Home")</li>
+                            <li class="top-border">&#124;</li>
+                            <li><a class="more">More</a></li>
+                            <li class="top-border">&#124;</li>
+                        </ul>
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <center>
+        <img src="~/Content/Imagess/dresses-53319_1280.jpg" />
+    </center>
+    <div class="greybox" style="margin: 40px; padding: 30px;">
+        <center>
+            <h1>
+                How Closet Guru Works
+            </h1>
+            <div class="row">
+                <div class="col-sm-4">
+
+                    <h1> &#10102 </h1>
+                    <h4>Fill Your Virtual Closet</h4>
+              
+
+                    Take Pictures of Your Clothing and Upload them to Closet Guru. 
+               
+                </div> 
+                    <div class="col-sm-4">
+                     <h1>&#10103</h1>                            
+                     <h4>Get Outfits</h4>
+        
+                        After you've uploaded all of your items, we look at your local weather and pick outfits for your from your closet. Don't worry, color and style are also taken into account.                  
+                    </div>
+                        <div class="col-sm-4">
+                       
+                            <h1>&#10104</h1>
+                         <h4>
+                         Update and Adjust Outfits
+                         </h4>
+                  
+                            If you want to see what an a different item might look like with the outfit we suggested. Just go to your virtual closet and try it out. 
+                      </div>             
+                   
+            </div>
+        </center>
     </div>
-    <div class="col-sm-9">
+   
 
-    </div>
-</div>
-<hr />
+   
 
+ 
+
+
+
+
+
+</body>

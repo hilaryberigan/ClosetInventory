@@ -10,14 +10,14 @@
 @using (Html.BeginForm("Submit", "Pants"))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Make Edits to Your Saved Items</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.isCapri, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
@@ -57,29 +57,28 @@
                     @Html.ValidationMessageFor(model => model.IsFavorite, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
-
+        </div>*@
+       
+       
         <div class="form-group">
-            @Html.LabelFor(model => model.DressinessRating, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Dressiness, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DressinessRating, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.DressinessRating, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.DressinessRating, Model.Dressiness, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.ValidationMessageFor(model => model.Dressiness, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.WarmthRating, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.WarmthType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.WarmthRating, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.WarmthRating, Model.WarmthType, htmlAttributes: new { @class = "control-label col-md-2" })
                 @Html.ValidationMessageFor(model => model.WarmthRating, "", new { @class = "text-danger" })
             </div>
         </div>
 
-       
         <div class="form-group">
-            @Html.LabelFor(model => model.ColorType, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ColorTypes, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ColorType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ColorType, Model.ColorTypes, htmlAttributes: new { @class = "control-label col-md-2" })
                 @Html.ValidationMessageFor(model => model.ColorType, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -91,24 +90,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsTightFit, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsTightFit)
-                    @Html.ValidationMessageFor(model => model.IsTightFit, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.HasPattern, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.HasPattern)
-                    @Html.ValidationMessageFor(model => model.HasPattern, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+
         @Html.HiddenFor(model => model.LargeFile)
         @Html.HiddenFor(model => model.SmallFile)
         @Html.HiddenFor(model => model.UserId)

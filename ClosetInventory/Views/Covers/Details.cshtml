@@ -4,50 +4,57 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<hr />
+<div class="row">
+    <div class="col-sm-2">
+        <img src="@Model.LargeFile" />
+    </div>
 
-<div>
-    <h4>Cover</h4>
-    <hr />
-    <img src="@Model.LargeFile" style="max-width: 300px; float: right;">  
-    <dl class="dl-horizontal">
-       
-       
+    <div class="col-sm-10">
+        <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DressinessRating)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.DressinessRating)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DressinessRating)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.WarmthRating)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DressinessRating)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.WarmthRating)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.WarmthRating)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Color)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.WarmthRating)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Color)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Color)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ColorType)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Color)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ColorType)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ColorType)
+            </dt>
 
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.ColorType)
+            </dd>
+
+
+        </dl>
+    </div>
+
+
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to Closet", "UserHomePage", "Home") |
+    @Html.ActionLink("Delete This Item", "Delete", "Covers") 
 </p>

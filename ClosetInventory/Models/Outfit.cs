@@ -48,5 +48,7 @@ namespace ClosetInventory.Models
         public ApplicationUser User { get; set; }
 
 
+        public string OccasionRating { get; set; }
+
     }
 }

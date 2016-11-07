@@ -64,12 +64,39 @@ namespace ClosetInventory.Controllers
         // GET: Shirts/Edit/5
         public ActionResult Edit(Shirt shirt)
         {
+            List<SelectListItem> dressiness = new List<SelectListItem>();
+            List<SelectListItem> warmthRating = new List<SelectListItem>();
+            List<SelectListItem> colorTypes = new List<SelectListItem>();
+            dressiness.Add(new SelectListItem { Text = "Very Casual", Value = "1" });
+            dressiness.Add(new SelectListItem { Text = "Casual", Value = "2" });
+            dressiness.Add(new SelectListItem { Text = "Somewhat Casual", Value = "3" });
+            dressiness.Add(new SelectListItem { Text = "Could be casual or dressy", Value = "4" });
+            dressiness.Add(new SelectListItem { Text = "Somewhat Dressy", Value = "5" });
+            dressiness.Add(new SelectListItem { Text = "Dressy", Value = "6" });
+            dressiness.Add(new SelectListItem { Text = "Very Dressy", Value = "7" });
+
+            warmthRating.Add(new SelectListItem { Text = "Really Hot Weather", Value = "1" });
+            warmthRating.Add(new SelectListItem { Text = "Hot Weather", Value = "2" });
+            warmthRating.Add(new SelectListItem { Text = "Warm Weather", Value = "3" });
+            warmthRating.Add(new SelectListItem { Text = "Cool Weather", Value = "4" });
+            warmthRating.Add(new SelectListItem { Text = "Cold Weather", Value = "5" });
+            warmthRating.Add(new SelectListItem { Text = "Really Cold Weather", Value = "6" });
+
+            colorTypes.Add(new SelectListItem { Text = "Dark", Value = "dark" });
+            colorTypes.Add(new SelectListItem { Text = "Bright", Value = "bright" });
+            colorTypes.Add(new SelectListItem { Text = "Neutral", Value = "neutral" });
+
+            shirt.Dressiness = dressiness;
+            shirt.WarmthType = warmthRating;
+            shirt.ColorTypes = colorTypes;
+
             if (shirt == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-    
+
             return View(shirt);
+
         }
 
         // POST: Shirts/Edit/5
@@ -81,6 +108,7 @@ namespace ClosetInventory.Controllers
         {
             if (ModelState.IsValid)
             {
+                shirt.lastWorn = DateTime.Today;
                 db.Entry(shirt).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Upload", "Home");
