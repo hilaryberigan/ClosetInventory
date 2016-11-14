@@ -11,7 +11,10 @@
     <div class="form-horizontal">
         <h4>Make Edits to Your Saved Items</h4>
         <hr />
-        Would you consider it to be "@Model.Color"?
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.LargeFile)
+        @Html.HiddenFor(model => model.SmallFile)
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -44,10 +47,6 @@
                 @Html.ValidationMessageFor(model => model.Color, "", new { @class = "text-danger" })
             </div>
         </div>
-        @Html.HiddenFor(model => model.LargeFile)
-        @Html.HiddenFor(model => model.SmallFile)
-        @Html.HiddenFor(model => model.UserId)
-        @Html.HiddenFor(model => model.lastWorn)
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -57,7 +56,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Closet", "UserHomePage", "Home")
 </div>
 
 @section Scripts {

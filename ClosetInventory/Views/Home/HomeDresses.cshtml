@@ -29,7 +29,7 @@
 
                             @*<img src="img_fjords.jpg" alt="Trolltunga Norway" width="300" height="200">*@
                             <div class="desc">
-                                <button id="move" class="btn btn-primary" onclick="MoveDressToOutfit('@item.Id')">Add to Outfit</button>
+                                <button id="move" class="btn btn-primary" onclick="MoveToOutfit('@item.Id')">Add to Outfit</button>
                             </div>
 
                         </div>
@@ -44,7 +44,7 @@
 
 <form action="" method="post" id="postTo">
     @Html.HiddenFor(model => model.Outfit.Id)
-    @Html.HiddenFor(model => model.Outfit.UserId)
+    @Html.HiddenFor(model => model.User.Id)
 
     <div id="itemType"></div>
 </form>
@@ -53,19 +53,27 @@
 <script type="text/javascript">
 
 
-    function MoveDressToOutfit(id) {
-        var outfitId =  @Model.Outfit.Id;
+
+
+    function MoveToOutfit(id) {
+        var outfitId = "";
+        @{ int? x = Model.Outfit != null ? Model.Outfit.Id : null;}
+            outfitId = @x;
         var clothingType = "dress";
-        var Id = id;
+
         $.ajax({
             url: "http://localhost:6001/Home/UpdateOutfit",
             type: "POST",
             dataType: 'json',
-            data: {'outfitId' : outfitId, 'Id': Id, 'clothingType': clothingType },
+            data: {'outfitId' : outfitId, 'Id': id, 'clothingType': clothingType },
             success: function (){
                 location.reload();
         }
         });
+
+
+
+    
 
     }
      function RenderPage(item) {

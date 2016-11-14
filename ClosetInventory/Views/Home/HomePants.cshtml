@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "HomePants";
 }
+@if (Model.Outfit == null) {
+
+
+}
 <center>
 
     <h1 class="closet">Your Closet</h1>
@@ -17,7 +21,7 @@
             <div class="container gallery">
 
                 @foreach (var item in Model.Pants)
-            {
+                {
                     <div class="col-sm-2" style="margin-left: 50px; margin-right:50px; margin-top: 5px; padding: 10px;">
                         <div class="boxgroup">
                             <div class="img">
@@ -45,7 +49,7 @@
 
                 <form action="" method="post" id="postTo">
                     @Html.HiddenFor(model => model.Outfit.Id)
-                    @Html.HiddenFor(model => model.Outfit.UserId)
+                    @Html.HiddenFor(model => model.User.Id)
 
                     <div id="itemType"></div>
                 </form>
@@ -55,7 +59,9 @@
 
 
     function MovePantsToOutfit(id) {
-        var outfitId =  @Model.Outfit.Id;
+        var outfitId = "";
+        @{ int? x = Model.Outfit != null ? Model.Outfit.Id : null;}
+            outfitId = @x;
         var clothingType = "pants";
         var pantsId = id;
         $.ajax({
@@ -68,15 +74,15 @@
         }
         });
 
-     
-    
+
+
     }
-        
-    
+
+
 
     function RenderPage(item) {
         var path = "Home" + item;
-       
+
         $('#postTo').attr("action", path);
         $('#postTo').submit();
 

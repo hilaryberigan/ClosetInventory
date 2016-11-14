@@ -126,7 +126,11 @@ namespace ClosetInventory.Controllers
             model.Shirts = db.Shirts.Where(m => m.UserId == userId).ToList();
             model.Dresses = db.Dresses.Where(n => n.UserId == userId).ToList();
 
+
+
             model.Outfit = db.Outfits.Where(m => m.Id == model.User.CurrentOutfitId).FirstOrDefault();
+            string x = model.Outfit != null ? model.User.Dressiness : null;
+            model.Dressiness = x;
             return View(model);
          
         }
@@ -153,7 +157,7 @@ namespace ClosetInventory.Controllers
         public ActionResult HomeCovers(TotalViewModel model)
         {
             model.Outfit = db.Outfits.Include("Pants").Include("Skirt").Include("Shirt").Include("Cover").Include("Shoe").Include("Dress").Where(m => m.Id == model.Outfit.Id).FirstOrDefault();
-            model.Covers = db.Covers.Where(m => m.UserId == model.Outfit.UserId).ToList();
+            model.Covers = db.Covers.Where(m => m.UserId == model.User.Id).ToList();
 
             return View(model);
         }
@@ -162,7 +166,7 @@ namespace ClosetInventory.Controllers
         {
 
             model.Outfit = db.Outfits.Include("Pants").Include("Skirt").Include("Shirt").Include("Cover").Include("Shoe").Include("Dress").Where(m => m.Id == model.Outfit.Id).FirstOrDefault();
-            model.Dresses = db.Dresses.Where(m => m.UserId == model.Outfit.UserId).ToList();
+            model.Dresses = db.Dresses.Where(m => m.UserId == model.User.Id).ToList();
 
             return View(model);
         }
@@ -170,7 +174,7 @@ namespace ClosetInventory.Controllers
         public ActionResult HomePants(TotalViewModel model)
         {
             model.Outfit = db.Outfits.Include("Pants").Include("Skirt").Include("Shirt").Include("Cover").Include("Shoe").Include("Dress").Where(m => m.Id == model.Outfit.Id).FirstOrDefault();
-            model.Pants = db.Pants.Where(m => m.UserId == model.Outfit.UserId).ToList();
+            model.Pants = db.Pants.Where(m => m.UserId == model.User.Id).ToList();
 
             return View(model);
         }
@@ -227,7 +231,7 @@ namespace ClosetInventory.Controllers
         public ActionResult HomeShirts(TotalViewModel model)
         {
             model.Outfit = db.Outfits.Include("Pants").Include("Skirt").Include("Shirt").Include("Cover").Include("Shoe").Include("Dress").Where(m => m.Id == model.Outfit.Id).FirstOrDefault();
-            model.Shirts = db.Shirts.Where(m => m.UserId == model.Outfit.UserId).ToList();
+            model.Shirts = db.Shirts.Where(m => m.UserId == model.User.Id).ToList();
 
             return View(model);
         }
@@ -235,7 +239,7 @@ namespace ClosetInventory.Controllers
         public ActionResult HomeShoes(TotalViewModel model)
         {
             model.Outfit = db.Outfits.Include("Pants").Include("Skirt").Include("Shirt").Include("Cover").Include("Shoe").Include("Dress").Where(m => m.Id == model.Outfit.Id).FirstOrDefault();
-            model.Shoes = db.Shoes.Where(m => m.UserId == model.Outfit.UserId).ToList();
+            model.Shoes = db.Shoes.Where(m => m.UserId == model.User.Id).ToList();
 
             return View(model);
         }

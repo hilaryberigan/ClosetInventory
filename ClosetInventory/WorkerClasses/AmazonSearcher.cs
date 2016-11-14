@@ -9,11 +9,12 @@ namespace ClosetInventory.WorkerClasses
 {
     public class AmazonSearcher
     {
+        AccessKeyHolder aKH = new AccessKeyHolder();
         public AmazonItemResponse GetAmazonResults(string keywords, int index)
         {
             var authentication = new AmazonAuthentication();
-            authentication.AccessKey = "AKIAJ3HAD7WFOAKEB4MQ";
-            authentication.SecretKey = "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";
+            authentication.AccessKey = aKH.GetAccessKey();
+            authentication.SecretKey = aKH.GetSecretKey();
             var num = (AmazonSearchIndex)index;
 
             var wrapper = new AmazonWrapper(authentication, AmazonEndpoint.US);

@@ -99,10 +99,7 @@ namespace ClosetInventory.WorkerClasses
             public ImageLabels ImageLabels { get; set; }
             public ImageProps ImageProps { get; set; }
 
-            
-        }
-
-   
+        }   
 }
 
     public class LabelResult

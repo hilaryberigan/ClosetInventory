@@ -45,7 +45,7 @@
 
 <form action="" method="post" id="postTo">
     @Html.HiddenFor(model => model.Outfit.Id)
-    @Html.HiddenFor(model => model.Outfit.UserId)
+    @Html.HiddenFor(model => model.User.Id)
 
     <div id="itemType"></div>
 </form>
@@ -55,18 +55,21 @@
 
 
     function MoveToOutfit(id) {
-        var outfitId =  @Model.Outfit.Id;
+        var outfitId = "";
+        @{ int? x = Model.Outfit != null ? Model.Outfit.Id : null;}
+            outfitId = @x;
         var clothingType = "shoe";
-        var Id = id;
         $.ajax({
             url: "http://localhost:6001/Home/UpdateOutfit",
             type: "POST",
             dataType: 'json',
-            data: {'outfitId' : outfitId, 'Id': Id, 'clothingType': clothingType },
+            data: {'outfitId' : outfitId, 'Id': id, 'clothingType': clothingType },
             success: function (){
                 location.reload();
         }
         });
+
+
 
     }
 

@@ -53,13 +53,13 @@ namespace ClosetInventory.Controllers
             {
                 var userId = User.Identity.GetUserId();
                 var shirt = new Shirt { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile, UserId = userId, lastWorn = DateTime.Today };
-                db.Shirts.Add(shirt);
-                db.SaveChanges();
+
                 return RedirectToAction("Edit", shirt);
             }
 
             return RedirectToAction("Upload", "Home");
         }
+
 
         // GET: Shirts/Edit/5
         public ActionResult Edit(Shirt shirt)
@@ -104,16 +104,14 @@ namespace ClosetInventory.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Submit([Bind(Include = "Id,SleeveLength,IsCropped,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,IsTightFit,UserId,lastWorn")] Shirt shirt)
+        public ActionResult Submit(Shirt shirt)
         {
-            if (ModelState.IsValid)
-            {
+                shirt.UserId = User.Identity.GetUserId();
                 shirt.lastWorn = DateTime.Today;
-                db.Entry(shirt).State = EntityState.Modified;
+                db.Shirts.Add(shirt);
                 db.SaveChanges();
-                return RedirectToAction("Upload", "Home");
-            }
-            return RedirectToAction("Edit", shirt);
+                return RedirectToAction("Details", new { id = shirt.Id });
+            
         }
 
         // GET: Shirts/Delete/5

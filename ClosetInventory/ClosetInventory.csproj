@@ -333,6 +333,7 @@
       <DependentUpon>201611032132379_user outfit ids.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\WishListItem.cs" />
+    <Compile Include="WorkerClasses\AccessKeyHolder.cs" />
     <Compile Include="WorkerClasses\AmazonSearcher.cs" />
     <Compile Include="WorkerClasses\ColorCalculator.cs" />
     <Compile Include="WorkerClasses\ImageManager.cs" />

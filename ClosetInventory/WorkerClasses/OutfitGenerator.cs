@@ -53,6 +53,7 @@ namespace ClosetInventory.WorkerClasses
                 temp = await temperature;
                 weatherModel.Temperature = temp;
                 weatherModel.Date = date;
+                weatherModel.UserId = userId;
                 db.Weathers.Add(weatherModel);
                 db.SaveChanges();
             }
@@ -91,41 +92,41 @@ namespace ClosetInventory.WorkerClasses
         public Collections GetDressyClothes(Collections collections)
         {
 
-            collections.Shirts = collections.Shirts.Where(m => m.DressinessRating > 7).ToList();
-            collections.Shoes = collections.Shoes.Where(m => m.DressinessRating > 7).ToList();
-            collections.Dresses = collections.Dresses.Where(m => m.DressinessRating > 7).ToList();
-            collections.PantsList = collections.PantsList.Where(m => m.DressinessRating > 7).ToList();
-            collections.Covers = collections.Covers.Where(m => m.DressinessRating > 7).ToList();
+            collections.Shirts = collections.Shirts.Where(m => m.DressinessRating > 3).ToList();
+            collections.Shoes = collections.Shoes.Where(m => m.DressinessRating > 5).ToList();
+            collections.Dresses = collections.Dresses.Where(m => m.DressinessRating > 5).ToList();
+            collections.PantsList = collections.PantsList.Where(m => m.DressinessRating > 5).ToList();
+            collections.Covers = collections.Covers.Where(m => m.DressinessRating > 4).ToList();
 
             return collections;
         }
 
         public Collections GetBusinessCasualClothes(Collections collections)
         {
-            collections.Shirts = collections.Shirts.Where(m => m.DressinessRating > 4).ToList();
-            collections.Shoes = collections.Shoes.Where(m => m.DressinessRating > 5 && m.DressinessRating < 9).ToList();
-            collections.Dresses = collections.Dresses.Where(m => m.DressinessRating > 4 && m.DressinessRating < 8).ToList();
-            collections.PantsList = collections.PantsList.Where(m => m.DressinessRating > 5).ToList();
-            collections.Covers = collections.Covers.Where(m => m.DressinessRating > 4).ToList();
+            collections.Shirts = collections.Shirts.Where(m => m.DressinessRating >= 4).ToList();
+            collections.Shoes = collections.Shoes.Where(m => m.DressinessRating >= 4 && m.DressinessRating <7).ToList();
+            collections.Dresses = collections.Dresses.Where(m => m.DressinessRating >= 3 && m.DressinessRating < 7).ToList();
+            collections.PantsList = collections.PantsList.Where(m => m.DressinessRating >= 4).ToList();
+            collections.Covers = collections.Covers.Where(m => m.DressinessRating >= 3).ToList();
 
             return collections;
         }
         public Collections GetCasualClothes(Collections collections)
         {
-            collections.Shirts = collections.Shirts.Where(m => m.DressinessRating <= 7).ToList();
-            collections.Shoes = collections.Shoes.Where(m => m.DressinessRating <= 5 ).ToList();
-            collections.Dresses = collections.Dresses.Where(m => m.DressinessRating <= 5).ToList();
-            collections.PantsList = collections.PantsList.Where(m => m.DressinessRating <= 5).ToList();
-            collections.Covers = collections.Covers.Where(m => m.DressinessRating <= 6).ToList();
+            collections.Shirts = collections.Shirts.Where(m => m.DressinessRating <= 3).ToList();
+            collections.Shoes = collections.Shoes.Where(m => m.DressinessRating <= 3 ).ToList();
+            collections.Dresses = collections.Dresses.Where(m => m.DressinessRating <= 4).ToList();
+            collections.PantsList = collections.PantsList.Where(m => m.DressinessRating <= 3).ToList();
+            collections.Covers = collections.Covers.Where(m => m.DressinessRating <= 4).ToList();
 
             return collections;
         }
         public Collections GetWarmClothes(Collections collections)
         {
             
-            collections.Shirts = collections.Shirts.Where(m => m.WarmthRating > 5).ToList();
-            collections.Shoes = collections.Shoes.Where(m => m.WarmthRating > 6).ToList();
-            collections.Dresses = collections.Dresses.Where(m => m.WarmthRating > 5).ToList();
+            collections.Shirts = collections.Shirts.Where(m => m.WarmthRating > 2).ToList();
+            collections.Shoes = collections.Shoes.Where(m => m.WarmthRating > 3).ToList();
+            collections.Dresses = collections.Dresses.Where(m => m.WarmthRating > 3).ToList();
             collections.PantsList = collections.PantsList.Where(m => m.WarmthRating > 3 && m.isCapri != true && m.isShorts != true).ToList();
             collections.Covers = collections.Covers.Where(m => m.WarmthRating > 3).ToList();
 
@@ -133,11 +134,11 @@ namespace ClosetInventory.WorkerClasses
         }
         public Collections GetCoolClothes(Collections collections)
         {
-            collections.Shirts = collections.Shirts.Where(m => m.WarmthRating <= 7).ToList();
-            collections.Shoes = collections.Shoes.Where(m => m.WarmthRating <= 6).ToList();
-            collections.Dresses = collections.Dresses.Where(m => m.WarmthRating <= 8).ToList();
-            collections.PantsList = collections.PantsList.Where(m => m.WarmthRating <= 8 && m.isShorts != true).ToList();
-            collections.Covers = collections.Covers.Where(m => m.WarmthRating <= 7).ToList();
+            collections.Shirts = collections.Shirts.Where(m => m.WarmthRating <= 6).ToList();
+            collections.Shoes = collections.Shoes.Where(m => m.WarmthRating <= 5).ToList();
+            collections.Dresses = collections.Dresses.Where(m => m.WarmthRating <= 6).ToList();
+            collections.PantsList = collections.PantsList.Where(m => m.WarmthRating <= 6 && m.isShorts != true).ToList();
+            collections.Covers = collections.Covers.Where(m => m.WarmthRating <= 4).ToList();
             return collections;
         }
 

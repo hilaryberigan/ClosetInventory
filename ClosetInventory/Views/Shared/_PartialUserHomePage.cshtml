@@ -17,7 +17,8 @@
             
 
 
-
+        @if (Model.Outfit != null)
+        {
         <div class="outfitCover">
             @if (Model.Outfit.Cover != null)
             {
@@ -48,8 +49,8 @@
                 <img class="outfit" id="shoes" src="@Model.Outfit.Shoe.LargeFile"/>
             }
         </div>
-        
-        
+
+        }
     </div>
         
 </center>

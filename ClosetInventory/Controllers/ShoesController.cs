@@ -59,8 +59,7 @@ public ActionResult Create()
             {
                 var userId = User.Identity.GetUserId();
                 var shoe = new Shoe { Color = model.Color, SmallFile = model.SmallFile, LargeFile = model.LargeFile, UserId = userId, lastWorn = DateTime.Today };
-                db.Shoes.Add(shoe);
-                db.SaveChanges();
+            
                 return RedirectToAction("Edit", shoe);
             }
 
@@ -108,16 +107,15 @@ public ActionResult Create()
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Submit([Bind(Include = "Id,SmallFile,LargeFile,IsFavorite,DressinessRating,WarmthRating,Color,ColorType,UserId,lastWorn")] Shoe shoe)
+        public ActionResult Submit(Shoe shoe)
         {
-            if (ModelState.IsValid)
-            {
+
                 shoe.lastWorn = DateTime.Today;
-                db.Entry(shoe).State = EntityState.Modified;
+                shoe.UserId = User.Identity.GetUserId();
+                db.Shoes.Add(shoe);
                 db.SaveChanges();
-                return RedirectToAction("Upload", "Home");
-            }
-            return RedirectToAction("Edit", shoe);
+                return RedirectToAction("Details", new { id = shoe.Id });
+
         }
 
         // GET: Shoes/Delete/5

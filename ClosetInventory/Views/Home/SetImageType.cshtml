@@ -5,13 +5,14 @@
 }
 @Scripts.Render("~/bundles/jquery")
 
-<img id="image" src="@Model.LargeFile" />
+<img id="image" src="@Model.LargeFile" style="max-height: 200px;"/>
 
 <form action="" method="post" id="postTo" >
  
     @Html.HiddenFor(model => model.LargeFile)
     @Html.HiddenFor(model => model.SmallFile)
     @Html.HiddenFor(model => model.Color)
+
 
     
 

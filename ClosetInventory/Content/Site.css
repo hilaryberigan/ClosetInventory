@@ -194,6 +194,8 @@ position: relative;
   right: 0;
   left: 0;
   border-width: 0 0 1px;
+  font-size: 3.5vh;
+  padding-left: 10.1vw;
 }
 
 .navbar-header:before,
@@ -255,4 +257,8 @@ position: relative;
     background-color: rgb(245, 245, 245);
 }
 
+.navbar-nav {
+    position: relative;
+    font-size:3vh;
+}
 
