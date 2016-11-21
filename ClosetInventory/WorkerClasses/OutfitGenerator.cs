@@ -193,25 +193,38 @@ namespace ClosetInventory.WorkerClasses
         {
             Random random = new Random();
             Shoe shoe = new Shoe();
-            try
+
+
+            if (shoes.Count > 0)
             {
-                if (shoes.Count > 0)
-                {
-                    if (outfit.Cover.Color == "black" || outfit.Pants.Color == "black")
+                try {
+                    if (outfit.Cover != null && outfit.Pants != null)
                     {
-                        shoes = shoes.Where(m => m.Color != "brown" || m.Color != "lightbrown" || m.Color != "darkbrown").ToList();
+                        if (outfit.Cover.Color == "black" || outfit.Pants.Color == "black")
+                        {
+                            shoes = shoes.Where(m => m.Color != "brown" || m.Color != "lightbrown" || m.Color != "darkbrown").ToList();
+                        }
+                    }
+                }
+                catch { }
+                try {
+                    if (outfit.Pants != null)
+                    {
+                        if (outfit.Pants.ColorType == "bright")
+                        {
+                            shoes = shoes.Where(m => m.ColorType != "bright").ToList();
+                        }
                     }
                     shoes = shoes.Where(m => m.ColorType != outfit.Shirt.ColorType).ToList();
-
-                    int a = random.Next(0, shoes.Count);
-                    shoe = shoes[a];
-
-                    return shoe;
                 }
-                return null;
+                catch { }
+                int a = random.Next(0, shoes.Count);
+                shoe = shoes[a];
+
+                return shoe;
             }
-            catch { };
-            return null;
+                return null;
+       
         }
 
 
@@ -288,17 +301,50 @@ namespace ClosetInventory.WorkerClasses
                     outfit.Dress = collections.Dresses[e];
                 }
 
-
-                if (outfit.Shirt != null || outfit.Dress != null)
+            
+            if (outfit.Shirt != null)
+            {
+                try
                 {
-                    outfit.Cover = GetCover(outfit, collections.Covers);
+                    if (outfitType != "casual")
+                    {
+                        outfit.Cover = GetCover(outfit, collections.Covers);
+                    }
                     outfit.Shoe = GetShoes(outfit, collections.Shoes);
                     outfit.Date = DateTime.Today.Date;
                     outfit.UserId = user.Id;
-                    db.Outfits.Add(outfit);
-                    db.SaveChanges();
                 }
+                catch
+                {
+                    MakeOutfit(user, db, temperature, outfitType);
+                }
+            }
+            
+            else if(outfit.Dress != null)
+            {
+                try
+                {
+                    if (outfitType != "casual")
+                    {
+                        outfit.Cover = GetCover(outfit, collections.Covers);
+                    }
 
+                    outfit.Shoe = GetShoes(outfit, collections.Shoes);
+                    outfit.Date = DateTime.Today.Date;
+                    outfit.UserId = user.Id;
+                }
+                catch
+                {
+                    MakeOutfit(user, db, temperature, outfitType);
+                }
+            }
+            else
+            {
+                MakeOutfit(user, db, temperature, outfitType);
+            }
+
+            db.Outfits.Add(outfit);
+            db.SaveChanges();
             return outfit;
         }
 

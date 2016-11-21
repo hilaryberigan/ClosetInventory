@@ -332,6 +332,10 @@
     <Compile Include="Migrations\201611032132379_user outfit ids.Designer.cs">
       <DependentUpon>201611032132379_user outfit ids.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611211435576_changes.cs" />
+    <Compile Include="Migrations\201611211435576_changes.Designer.cs">
+      <DependentUpon>201611211435576_changes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\WishListItem.cs" />
     <Compile Include="WorkerClasses\AccessKeyHolder.cs" />
     <Compile Include="WorkerClasses\AmazonSearcher.cs" />
@@ -593,6 +597,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611032132379_user outfit ids.resx">
       <DependentUpon>201611032132379_user outfit ids.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611211435576_changes.resx">
+      <DependentUpon>201611211435576_changes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

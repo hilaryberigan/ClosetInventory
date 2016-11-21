@@ -7,9 +7,10 @@
 
 
 
-
+<input type="button" class="btn btn-primary" value="Wish List" style="float:right" />
 <h1>Shop</h1>
 <h3>Search Amazon for Clothing Items</h3>
+
 <hr />
 <form action="/Home/SearchAmazon" method="post">
     <div class="container heading-box">
@@ -45,10 +46,13 @@
         foreach (var item in Model.Response.Items.Item.ToList())
         {
             <div class="row">
-                <a href='@item.DetailPageURL'><img src='@item.MediumImage' /></a>
                 <a href='@item.DetailPageURL'>@item.ItemAttributes.Title</a>
-                <input type="hidden" value="@item" id="Item" name="Item" />
-                <input type="submit" class="btn btn-primary" value="Save To WishList" />
+                <br />
+                <a href='@item.DetailPageURL'><img src='@item.MediumImage' /></a>
+                <input type="hidden" value="@item.ItemAttributes.Title" id="Title" name="Title" />
+                <input type="hidden" value="@item.DetailPageURL" id="Url" name="Url"/>
+                <input type="hidden" value="@item.MediumImage.URL" id="Image" name="Image" />
+                <input type="submit" class="btn btn-primary" value="Save To Wish List" />
 
             </div>
 

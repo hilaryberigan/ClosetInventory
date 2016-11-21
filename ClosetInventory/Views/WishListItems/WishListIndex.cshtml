@@ -1,45 +1,22 @@
 ﻿@model IEnumerable<ClosetInventory.Models.WishListItem>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Wish List";
 }
 
-<h2>Index</h2>
+<h1>Your Wish List</h1>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Url)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImageUrl)
-        </th>
-        <th></th>
-    </tr>
-
+<h4> Click the link to buy it on Amazon.com.</h4>
+<hr />
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Url)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImageUrl)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+    <div class="row">
+            <a href="@item.Url">@Html.DisplayFor(modelItem => item.Title)</a>
+            <br />
+
+            <img src="@item.ImageUrl" />
+        
+            <a href="Delete/@item.Id" class="btn btn-primary"> Remove </a>
+    </div>
 }
 
-</table>
+

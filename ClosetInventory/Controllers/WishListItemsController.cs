@@ -7,12 +7,15 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClosetInventory.Models;
+using ClosetInventory.WorkerClasses;
+using System.IO;
 
 namespace ClosetInventory.Controllers
 {
     public class WishListItemsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private object file;
 
         // GET: WishListItems
         public ActionResult WishListIndex()
@@ -45,20 +48,23 @@ namespace ClosetInventory.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult CreateWishListItem(AmazonSearchModel model)
+        public ActionResult CreateWishListItem(string Title, string Url, string Image)
         {
-            WishListItem wListItem = new WishListItem();
-            wListItem.ImageUrl = model.Item.MediumImage.ToString();
-            wListItem.Url = model.Item.DetailPageURL;
-            wListItem.Title = model.Item.ItemAttributes.Title;
-
-            if (ModelState.IsValid)
+            if (Image != null)
             {
-                db.WishListItems.Add(wListItem);
-                db.SaveChanges();
-              
-            }
+                WishListItem wListItem = new WishListItem();
 
+                wListItem.Url = Url;
+                wListItem.Title = Title;
+                wListItem.ImageUrl = Image;
+
+                if (ModelState.IsValid)
+                {
+                    db.WishListItems.Add(wListItem);
+                    db.SaveChanges();
+
+                }          
+            }
             return RedirectToAction("WishListIndex");
         }
 
